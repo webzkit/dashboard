@@ -1,0 +1,97 @@
+:root {
+  --g-box-shadow-color: rgb(0 0 0 / 12%);
+
+  --g-app-bg: var(--el-bg-color);
+
+  --g-main-bg: var(--el-bg-color-page);
+
+  --g-header-bg: #222b45;
+
+  --g-header-color: #fff;
+
+  --g-header-menu-color: #fff;
+
+  --g-header-menu-hover-color: #fff;
+
+  --g-header-menu-hover-bg: #334067;
+
+  --g-header-menu-active-color: #fff;
+
+  --g-header-menu-active-bg: #334067;
+
+  --g-main-sidebar-bg: var(--el-color-primary);
+
+  --g-main-sidebar-menu-color: #eee;
+
+  --g-main-sidebar-menu-hover-color: #fff;
+
+  --g-main-sidebar-menu-hover-bg: #334067;
+
+  --g-main-sidebar-menu-active-color: #fff;
+
+  --g-main-sidebar-menu-active-bg: #334067;
+
+  --g-sub-sidebar-bg: #fff;
+
+  --g-sub-sidebar-menu-bg: #e8e8e8;
+
+  --g-sub-sidebar-menu-color: var(--el-text-color-primary);
+
+  --g-sub-sidebar-menu-hover-color: var(--el-text-color-primary);
+
+  --g-sub-sidebar-menu-hover-bg: #e1e1e1;
+
+  --g-sub-sidebar-menu-active-color: #fff;
+
+  --g-sub-sidebar-menu-active-bg: var(--el-color-primary);
+
+  --g-toolbar-bg: var(--el-bg-color);
+
+  --g-nprogress-color: var(--el-color-primary);
+
+  &.dark {
+    --g-box-shadow-color: rgb(0 0 0 / 72%);
+
+    --g-app-bg: var(--el-bg-color);
+
+    --g-main-bg: var(--el-bg-color-page);
+
+    --g-header-bg: var(--el-bg-color);
+    --g-header-color: #fff;
+    --g-header-menu-color: #ccc;
+    --g-header-menu-hover-color: #fff;
+    --g-header-menu-hover-bg: var(--el-color-primary-light-5);
+    --g-header-menu-active-color: #fff;
+    --g-header-menu-active-bg: var(--el-color-primary-light-3);
+
+    --g-main-sidebar-bg: var(--el-bg-color);
+
+    --g-main-sidebar-menu-color: #ccc;
+
+    --g-main-sidebar-menu-hover-color: #fff;
+
+    --g-main-sidebar-menu-hover-bg: var(--el-color-primary-light-5);
+
+    --g-main-sidebar-menu-active-color: #fff;
+
+    --g-main-sidebar-menu-active-bg: var(--el-color-primary-light-3);
+
+    --g-sub-sidebar-bg: var(--el-bg-color-page);
+
+    --g-sub-sidebar-menu-bg: var(--el-bg-color);
+
+    --g-sub-sidebar-menu-color: var(--el-text-color-secondary);
+
+    --g-sub-sidebar-menu-hover-color: var(--el-text-color-primary);
+
+    --g-sub-sidebar-menu-hover-bg: var(--el-color-primary-light-5);
+
+    --g-sub-sidebar-menu-active-color: var(--el-text-color-primary);
+
+    --g-sub-sidebar-menu-active-bg: var(--el-color-primary-light-3);
+
+    --g-toolbar-bg: var(--el-bg-color);
+
+    --g-nprogress-color: var(--el-color-primary);
+  }
+}

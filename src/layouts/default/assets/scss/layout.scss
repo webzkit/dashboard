@@ -1,0 +1,39 @@
+:root {
+  // Header width (default adaptive width, fixed width, centered display after fixed width)
+  --g-header-width: 100%;
+
+  // Head height
+  --g-header-height: 70px;
+
+  // Sidebar width
+  --g-main-sidebar-width: 70px;
+  --g-sub-sidebar-width: 220px;
+
+  // Sidebar Logo Height
+  --g-sidebar-logo-height: 50px;
+
+  // top bar height
+  --g-topbar-height: 50px;
+}
+
+ol, 
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.rotate-animation {
+  animation: rotate 600ms linear infinite;
+}
+
