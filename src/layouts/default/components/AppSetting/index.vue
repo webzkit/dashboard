@@ -1,11 +1,26 @@
 <template>
   <div>
-    <el-drawer v-model="isOpenedDrawer" title="App Setting" direction="rtl" :size="360">
+    <el-drawer
+      v-model="isOpenedDrawer"
+      title="App Setting"
+      direction="rtl"
+      :size="360"
+      class="setting-drawer"
+    >
       <el-divider v-if="isDisplayModePc(getDisplayMode)">Layouts</el-divider>
       <div v-if="isDisplayModePc(getDisplayMode)" class="menu-mode">
-        <el-tooltip content="Sidebar mode (with main navigation)" placement="top" :show-after="500">
-          <div :class="[{ active: isActiveMenuMode('side', getMenuMode) }, 'mode mode-side']"
-            @click="onSettingHandle('side', SettingTaskEnum.MENU_MODE)">
+        <el-tooltip
+          content="Sidebar mode (with main navigation)"
+          placement="top"
+          :show-after="500"
+        >
+          <div
+            :class="[
+              { active: isActiveMenuMode('side', getMenuMode) },
+              'mode mode-side',
+            ]"
+            @click="onSettingHandle('side', SettingTaskEnum.MENU_MODE)"
+          >
             <div class="mode-container" />
             <el-icon>
               <icon-ep-check />
@@ -13,17 +28,31 @@
           </div>
         </el-tooltip>
         <el-tooltip content="Top mode" placement="top" :show-after="500">
-          <div :class="['mode mode-head', { active: isActiveMenuMode('head', getMenuMode) }]"
-            @click="onSettingHandle('head', SettingTaskEnum.MENU_MODE)">
+          <div
+            :class="[
+              'mode mode-head',
+              { active: isActiveMenuMode('head', getMenuMode) },
+            ]"
+            @click="onSettingHandle('head', SettingTaskEnum.MENU_MODE)"
+          >
             <div class="mode-container" />
             <el-icon>
               <icon-ep-check />
             </el-icon>
           </div>
         </el-tooltip>
-        <el-tooltip content="Sidebar mode (without main navigation)" placement="top" :show-after="500">
-          <div :class="['mode mode-single', { active: isActiveMenuMode('single', getMenuMode) }]"
-            @click="onSettingHandle('single', SettingTaskEnum.MENU_MODE)">
+        <el-tooltip
+          content="Sidebar mode (without main navigation)"
+          placement="top"
+          :show-after="500"
+        >
+          <div
+            :class="[
+              'mode mode-single',
+              { active: isActiveMenuMode('single', getMenuMode) },
+            ]"
+            @click="onSettingHandle('single', SettingTaskEnum.MENU_MODE)"
+          >
             <div class="mode-container" />
             <el-icon>
               <icon-ep-check />
@@ -40,8 +69,11 @@
             <icon-ep-question-filled />
           </el-tooltip>
         </div>
-        <el-radio-group :model-value="unref(getThemeSize)" size="small"
-          @change="onSettingHandle($event, SettingTaskEnum.APP_THEME_SIZE)">
+        <el-radio-group
+          :model-value="unref(getThemeSize)"
+          size="small"
+          @change="onSettingHandle($event, SettingTaskEnum.APP_THEME_SIZE)"
+        >
           <el-radio-button label="large">large</el-radio-button>
           <el-radio-button label="default">default</el-radio-button>
           <el-radio-button label="small">small</el-radio-button>
@@ -51,27 +83,49 @@
       <div class="setting-item">
         <div class="label">Color</div>
         <ul class="theme-color">
-          <li v-for="(item, index) in themeColors" :key="index"
-            @click="onSettingHandle(item.color, SettingTaskEnum.APP_THEME_COLOR)"
-            :style="getThemeColorStyle(item.color)">
-            <el-icon style="margin: 0.1em 0.1em 0 0" :size="17" :color="getThemeColorCheckStyle(item.color)">
+          <li
+            v-for="(item, index) in themeColors"
+            :key="index"
+            @click="
+              onSettingHandle(item.color, SettingTaskEnum.APP_THEME_COLOR)
+            "
+            :style="getThemeColorStyle(item.color)"
+          >
+            <el-icon
+              style="margin: 0.1em 0.1em 0 0"
+              :size="17"
+              :color="getThemeColorCheckStyle(item.color)"
+            >
               <icon-ep-check />
             </el-icon>
           </li>
         </ul>
       </div>
 
-
       <el-divider>Navigation</el-divider>
-      <SwitchSetting :title="`Show Logo`" :def="unref(getShowLogo)" :event="SettingTaskEnum.MENU_SHOW_LOGO" />
+      <SwitchSetting
+        :title="`Show Logo`"
+        :def="unref(getShowLogo)"
+        :event="SettingTaskEnum.MENU_SHOW_LOGO"
+      />
 
-      <SwitchSetting :title="`Collapsed`" :def="unref(getSubMenuCollaspe)" :event="SettingTaskEnum.MENU_SUB_COLLAPSE" />
+      <SwitchSetting
+        :title="`Collapsed`"
+        :def="unref(getSubMenuCollaspe)"
+        :event="SettingTaskEnum.MENU_SUB_COLLAPSE"
+      />
 
-      <SwitchSetting :title="`Unique Opened`" :def="unref(getSubMenuUniqueOpened)"
-        :event="SettingTaskEnum.MENU_UNIQUE_OPENED" />
+      <SwitchSetting
+        :title="`Unique Opened`"
+        :def="unref(getSubMenuUniqueOpened)"
+        :event="SettingTaskEnum.MENU_UNIQUE_OPENED"
+      />
 
-      <SwitchSetting :title="`Toggle Jump`" :def="unref(getSwitchMainMenuAndPageJump)"
-        :event="SettingTaskEnum.MENU_SWITCH_PAGE_JUMP" />
+      <SwitchSetting
+        :title="`Toggle Jump`"
+        :def="unref(getSwitchMainMenuAndPageJump)"
+        :event="SettingTaskEnum.MENU_SWITCH_PAGE_JUMP"
+      />
 
       <div class="setting-item">
         <div class="label">
@@ -80,57 +134,94 @@
             <icon-ep-question-filled />
           </el-tooltip>
         </div>
-        <el-radio-group :model-value="unref(getMenuWidth)" size="small"
-          @change="onSettingHandle($event, SettingTaskEnum.MENU_WIDTH)">
+        <el-radio-group
+          :model-value="unref(getMenuWidth)"
+          size="small"
+          @change="onSettingHandle($event, SettingTaskEnum.MENU_WIDTH)"
+        >
           <template v-for="item in menuWidths">
-            <el-radio-button :label="item.value">{{ item.name }}</el-radio-button>
+            <el-radio-button :label="item.value">{{
+              item.name
+            }}</el-radio-button>
           </template>
         </el-radio-group>
       </div>
 
-
       <el-divider>Header</el-divider>
-      <SwitchSetting :title="`Fixed`" :def="unref(getFixed)" :event="SettingTaskEnum.HEADER_FIXED" />
+      <SwitchSetting
+        :title="`Fixed`"
+        :def="unref(getFixed)"
+        :event="SettingTaskEnum.HEADER_FIXED"
+      />
 
-      <SwitchSetting :title="`Sidebar Collapse`" :def="unref(getEnableSidebarCollapse)"
-        :event="SettingTaskEnum.HEADER_ENABLE_SIDEBAR_COLLAPSE" />
+      <SwitchSetting
+        :title="`Sidebar Collapse`"
+        :def="unref(getEnableSidebarCollapse)"
+        :event="SettingTaskEnum.HEADER_ENABLE_SIDEBAR_COLLAPSE"
+      />
 
-      <SwitchSetting :title="`Breadcrumb`" :def="unref(getEnableBreadcrumb)"
-        :event="SettingTaskEnum.HEADER_ENABLE_BREADCRUMB" />
+      <SwitchSetting
+        :title="`Breadcrumb`"
+        :def="unref(getEnableBreadcrumb)"
+        :event="SettingTaskEnum.HEADER_ENABLE_BREADCRUMB"
+      />
 
-      <SwitchSetting :title="`Full Screen`" :def="unref(getEnableFullScreen)"
-        :event="SettingTaskEnum.HEADER_ENABLE_FULL_SCREEN" />
+      <SwitchSetting
+        :title="`Full Screen`"
+        :def="unref(getEnableFullScreen)"
+        :event="SettingTaskEnum.HEADER_ENABLE_FULL_SCREEN"
+      />
 
-      <SwitchSetting :title="`Page Reload`" :def="unref(getEnablePageReload)"
-        :event="SettingTaskEnum.HEADER_ENABLE_PAGE_RELOAD" />
+      <SwitchSetting
+        :title="`Page Reload`"
+        :def="unref(getEnablePageReload)"
+        :event="SettingTaskEnum.HEADER_ENABLE_PAGE_RELOAD"
+      />
 
-      <SwitchSetting :title="`Color Schema`" :def="unref(getEnableColorSchema)"
-        :event="SettingTaskEnum.HEADER_ENABLE_COLOR_SCHEMA" />
+      <SwitchSetting
+        :title="`Color Schema`"
+        :def="unref(getEnableColorSchema)"
+        :event="SettingTaskEnum.HEADER_ENABLE_COLOR_SCHEMA"
+      />
 
-      <SwitchSetting :title="`Multi tabs`" :def="unref(getEnableMultiTab)"
-        :event="SettingTaskEnum.HEADER_ENABLE_MULTI_TAB" />
-
+      <SwitchSetting
+        :title="`Multi tabs`"
+        :def="unref(getEnableMultiTab)"
+        :event="SettingTaskEnum.HEADER_ENABLE_MULTI_TAB"
+      />
 
       <el-divider>Footer</el-divider>
-      <SwitchSetting title="Copyright" :def="unref(getEnableCopyright)"
-        :event="SettingTaskEnum.FOOTER_ENABLE_COPYRIGHT"></SwitchSetting>
+      <SwitchSetting
+        title="Copyright"
+        :def="unref(getEnableCopyright)"
+        :event="SettingTaskEnum.FOOTER_ENABLE_COPYRIGHT"
+      ></SwitchSetting>
 
       <div class="setting-item">
         <div class="label">Date</div>
-        <el-input :model-value="unref(getDateFooter)" :disabled="!unref(getEnableCopyright)"
-          @input="onSettingHandle($event, SettingTaskEnum.FOOTER_DATE)" />
+        <el-input
+          :model-value="unref(getDateFooter)"
+          :disabled="!unref(getEnableCopyright)"
+          @input="onSettingHandle($event, SettingTaskEnum.FOOTER_DATE)"
+        />
       </div>
 
       <div class="setting-item">
         <div class="label">Company</div>
-        <el-input :model-value="unref(getCompanyFooter)" :disabled="!unref(getEnableCopyright)"
-          @input="onSettingHandle($event, SettingTaskEnum.FOOTER_COMPANY)" />
+        <el-input
+          :model-value="unref(getCompanyFooter)"
+          :disabled="!unref(getEnableCopyright)"
+          @input="onSettingHandle($event, SettingTaskEnum.FOOTER_COMPANY)"
+        />
       </div>
 
       <div class="setting-item">
         <div class="label">Website</div>
-        <el-input :model-value="unref(getWebsiteFooter)" :disabled="!unref(getEnableCopyright)"
-          @input="onSettingHandle($event, SettingTaskEnum.FOOTER_WEBSITE)" />
+        <el-input
+          :model-value="unref(getWebsiteFooter)"
+          :disabled="!unref(getEnableCopyright)"
+          @input="onSettingHandle($event, SettingTaskEnum.FOOTER_WEBSITE)"
+        />
       </div>
     </el-drawer>
   </div>
@@ -175,14 +266,14 @@ const {
   getEnableCopyright,
   getDateFooter,
   getCompanyFooter,
-  getWebsiteFooter
+  getWebsiteFooter,
 } = useFooterSetting();
 
 const { proxy } = getCurrentInstance() as any;
 const isOpenedDrawer = ref(false);
 onMounted(() => {
   proxy.$eventBus.on("openDrawerAppSetting", () => {
-    isOpenedDrawer.value = !isOpenedDrawer.value
+    isOpenedDrawer.value = !isOpenedDrawer.value;
   });
 });
 
@@ -198,26 +289,30 @@ const isActiveMenuMode = function (kind: string, menuMode: string): boolean {
 
 const getThemeColorStyle = computed(() => {
   return (color: string | any) => {
-    return { background: color }
-  }
+    return { background: color };
+  };
 });
 const getThemeColorCheckStyle = computed(() => {
   return (color: string | any) => {
     if (unref(getThemeColor) !== color) {
-      return "transparent"
+      return "transparent";
     }
 
     return "#ffffff";
-  }
+  };
 });
 </script>
-
 
 <style lang="scss" scoped>
 :deep(.el-drawer__header) {
   margin-bottom: initial;
-  padding-bottom: 20px;
+  padding: 12px 8px 12px 20px;
+  color: var(--el-color-primary);
   border-bottom: 1px solid var(--el-border-color);
+}
+
+:deep(.el-drawer__body) {
+  padding: 12px;
 }
 
 :deep(.el-drawer__footer) {
@@ -231,7 +326,7 @@ const getThemeColorCheckStyle = computed(() => {
 }
 
 :deep(.el-divider) {
-  margin: 36px 0 24px;
+  margin: 24px 0 20px;
 }
 
 .menu-mode {
@@ -258,7 +353,7 @@ const getThemeColorCheckStyle = computed(() => {
     }
 
     &.active {
-      box-shadow: 0 0 0 2px var(--el-color-primary);
+      box-shadow: 0 0 0 1px var(--el-color-primary);
     }
 
     &::before,
@@ -274,7 +369,7 @@ const getThemeColorCheckStyle = computed(() => {
       position: absolute;
       width: 100%;
       height: 100%;
-      background-color: var(--g-sub-sidebar-menu-active-bg);
+      background-color: var(--el-color-primary);
       opacity: 0.2;
     }
 
@@ -285,7 +380,7 @@ const getThemeColorCheckStyle = computed(() => {
         left: 5px;
         bottom: 5px;
         width: 10px;
-        background-color: var(--g-sub-sidebar-menu-active-bg);
+        background-color: var(--el-color-primary);
       }
 
       &::after {
@@ -294,7 +389,7 @@ const getThemeColorCheckStyle = computed(() => {
         left: 20px;
         bottom: 5px;
         width: 15px;
-        background-color: var(--g-sub-sidebar-menu-active-bg);
+        background-color: var(--el-color-primary);
         opacity: 0.5;
       }
 
@@ -303,7 +398,7 @@ const getThemeColorCheckStyle = computed(() => {
         left: 40px;
         right: 5px;
         bottom: 5px;
-        border: 1px dashed var(--g-sub-sidebar-menu-active-bg);
+        border: 1px dashed var(--el-color-primary);
       }
     }
 
@@ -314,7 +409,7 @@ const getThemeColorCheckStyle = computed(() => {
         left: 5px;
         right: 5px;
         height: 10px;
-        background-color: var(--g-sub-sidebar-menu-active-bg);
+        background-color: var(--el-color-primary);
       }
 
       &::after {
@@ -323,7 +418,7 @@ const getThemeColorCheckStyle = computed(() => {
         left: 5px;
         bottom: 5px;
         width: 15px;
-        background-color: var(--g-sub-sidebar-menu-active-bg);
+        background-color: var(--el-color-primary);
         opacity: 0.5;
       }
 
@@ -332,7 +427,7 @@ const getThemeColorCheckStyle = computed(() => {
         left: 25px;
         right: 5px;
         bottom: 5px;
-        border: 1px dashed var(--g-sub-sidebar-menu-active-bg);
+        border: 1px dashed var(--el-color-primary);
       }
     }
 
@@ -344,7 +439,7 @@ const getThemeColorCheckStyle = computed(() => {
         left: 5px;
         bottom: 5px;
         width: 15px;
-        background-color: var(--g-sub-sidebar-menu-active-bg);
+        background-color: var(--el-color-primary);
         opacity: 0.5;
       }
 
@@ -353,7 +448,7 @@ const getThemeColorCheckStyle = computed(() => {
         left: 25px;
         right: 5px;
         bottom: 5px;
-        border: 1px dashed var(--g-sub-sidebar-menu-active-bg);
+        border: 1px dashed var(--el-color-primary);
       }
     }
 
@@ -376,7 +471,7 @@ const getThemeColorCheckStyle = computed(() => {
   align-items: center;
   justify-content: space-between;
   margin: 5px 0;
-  padding: 5px 10px;
+  padding: 5px 5px;
   border-radius: 5px;
   transition: all 0.3s;
 

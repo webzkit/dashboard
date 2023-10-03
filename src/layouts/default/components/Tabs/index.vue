@@ -1,6 +1,9 @@
 <template>
   <div class="tabs">
-    <el-scrollbar class="scroll-container tags-view-container" ref="scrollbarDom">
+    <el-scrollbar
+      class="scroll-container tags-view-container"
+      ref="scrollbarDom"
+    >
       <template v-for="tab in getRouteMultiTabs" :key="tab.meta.title">
         <ItemTab :menu="tab" :active="activeTab(tab)" @close="closeTab(tab)" />
       </template>
@@ -19,14 +22,13 @@
   </div>
 </template>
 
-
 <script lang="ts" setup>
-import { unref } from 'vue';
-import { RouteLocationNormalized, useRoute, useRouter } from 'vue-router';
-import ItemTab from './ItemTab.vue';
-import ActionTab from './ActionTab.vue';
-import { PageEnum } from '/@/enums/pageEnum';
-import { useTabs } from '/@/hooks/web/useTabs';
+import { unref } from "vue";
+import { RouteLocationNormalized, useRoute, useRouter } from "vue-router";
+import ItemTab from "./ItemTab.vue";
+import ActionTab from "./ActionTab.vue";
+import { PageEnum } from "/@/enums/pageEnum";
+import { useTabs } from "/@/hooks/web/useTabs";
 
 const { getRouteMultiTabs, addTab, refreshTab, closeTab } = useTabs();
 
@@ -36,11 +38,11 @@ const route = useRoute();
 let activeTab = (tab: RouteLocationNormalized): boolean => {
   const { path } = unref(router.currentRoute);
 
-  return tab.path === path
+  return tab.path === path;
 };
 
 if (getRouteMultiTabs.value.length === 0) {
-  const dashboard = router.resolve({ path: PageEnum.BASE_HOME })
+  const dashboard = router.resolve({ path: PageEnum.BASE_HOME });
 
   addTab(dashboard);
 }
@@ -50,29 +52,32 @@ router.afterEach(() => {
 });
 
 const reloadTab = () => {
-  const rotate = document.querySelector('.rotate');
-  rotate?.classList.add('rotate-animation');
+  const rotate = document.querySelector(".rotate");
+  rotate?.classList.add("rotate-animation");
   refreshTab();
   setTimeout(() => {
-    rotate?.classList.remove('rotate-animation');
-  }, 600)
-}
+    rotate?.classList.remove("rotate-animation");
+  }, 600);
+};
 
 addTab(route);
 </script>
-
 
 <style lang="scss" scoped>
 .tabs {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 37px;
+  height: 38px;
   background: var(--g-sub-sidebar-bg);
   border-bottom: 1px solid var(--el-border-color);
   border-top: 1px solid var(--el-border-color);
-  box-shadow: 0 1px 4px 0 var(--g-box-shadow-color);
-  transition: background-color 0.3s, var(--el-transition-box-shadow), left 0.3s, width 0.3s;
+  box-shadow: 0 1px 20px 0 var(--g-box-shadow-color);
+  transition:
+    background-color 0.3s,
+    var(--el-transition-box-shadow),
+    left 0.3s,
+    width 0.3s;
 
   .right-button {
     display: flex;
@@ -120,4 +125,3 @@ addTab(route);
   display: flex;
 }
 </style>
-

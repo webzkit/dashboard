@@ -1,22 +1,39 @@
 <template>
-  <div class="sub-sidebar-container" :class="{ 'is-collapse': isPcDisplay(getDisplayMode) && getSubMenuCollaspe }"
-    @scroll="onSidebarScroll">
+  <div
+    class="sub-sidebar-container"
+    :class="{
+      'is-collapse': isPcDisplay(getDisplayMode) && getSubMenuCollaspe,
+    }"
+    @scroll="onSidebarScroll"
+  >
+    <Logo
+      :show-logo="isMenuModeSingle(getMenuMode)"
+      :class="{
+        'sidebar-logo': true,
+        'sidebar-logo-bg': isMenuModeSingle(getMenuMode),
+        shadow: sidebarScrollTop,
+      }"
+    />
 
-    <Logo :show-logo="isMenuModeSingle(getMenuMode)" :class="{
-      'sidebar-logo': true,
-      'sidebar-logo-bg': isMenuModeSingle(getMenuMode),
-      'shadow': sidebarScrollTop
-    }" />
-
-    <el-menu :unique-opened="getSubMenuUniqueOpened" :default-openeds="getDefaultOpenedPaths"
-      :default-active="getActiveRoute($route)" :collapse="isPcDisplay(getDisplayMode) && getSubMenuCollaspe"
-      :collapse-transition="false" :class="{
-        'is-collapse-without-logo': !isMenuModeSingle(getMenuMode) && getSubMenuCollaspe
-      }">
+    <el-menu
+      :unique-opened="getSubMenuUniqueOpened"
+      :default-openeds="getDefaultOpenedPaths"
+      :default-active="getActiveRoute($route)"
+      :collapse="isPcDisplay(getDisplayMode) && getSubMenuCollaspe"
+      :collapse-transition="false"
+      :class="{
+        'is-collapse-without-logo':
+          !isMenuModeSingle(getMenuMode) && getSubMenuCollaspe,
+      }"
+    >
       <transition-group name="sub-sidebar">
         <template v-for="(route, index) in getSidebarMenus">
-          <ItemSidebar v-if="get(route, 'meta.sidebar') !== false" :key="(get(route, 'path') || index)" :item="route"
-            :base-path="get(route, 'path')" />
+          <ItemSidebar
+            v-if="get(route, 'meta.sidebar') !== false"
+            :key="get(route, 'path') || index"
+            :item="route"
+            :base-path="get(route, 'path')"
+          />
         </template>
       </transition-group>
     </el-menu>
@@ -32,27 +49,26 @@ import ItemSidebar from "./ItemSidebar.vue";
 import { useAppSetting } from "/@/hooks/setting/useAppSetting";
 import { get } from "lodash";
 
-
 const { getDisplayMode } = useAppSetting();
 const {
   getSubMenuCollaspe,
   getMenuMode,
   getSubMenuUniqueOpened,
   getSidebarMenus,
-  getDefaultOpenedPaths
+  getDefaultOpenedPaths,
 } = useMenuSetting();
 
 const sidebarScrollTop = ref(0);
 const onSidebarScroll = function (event: any) {
   sidebarScrollTop.value = event.target.scrollTop;
-}
+};
 
 const isPcDisplay = (value: string) => value === DisplayModeEnum.PC;
 const isMenuModeSingle = (value: string) => value === MenuModeEnum.SINGLE;
 
 const getActiveRoute = (route: any): any => {
   return route.meta.activemenu || route.path;
-}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -75,10 +91,11 @@ const getActiveRoute = (route: any): any => {
   bottom: 0;
   background-color: var(--g-sub-sidebar-bg);
   box-shadow: 10px 0 10px -10px var(--g-box-shadow-color);
-  transition: background-color 0.3s,
-  var(--el-transition-box-shadow),
-  left 0.3s,
-  width 0.3s;
+  transition:
+    background-color 0.3s,
+    var(--el-transition-box-shadow),
+    left 0.3s,
+    width 0.3s;
 
   &.is-collapse {
     width: 64px;
@@ -95,7 +112,10 @@ const getActiveRoute = (route: any): any => {
   }
 
   .sidebar-logo {
-    transition: box-shadow 0.2s, background-color 0.3s, color 0.3s;
+    transition:
+      box-shadow 0.2s,
+      background-color 0.3s,
+      color 0.3s;
     background-color: var(--g-sub-sidebar-bg);
 
     &:not(.sidebar-logo-bg) {
@@ -116,7 +136,11 @@ const getActiveRoute = (route: any): any => {
   .el-menu {
     border-right: 0;
     padding-top: var(--g-sidebar-logo-height);
-    transition: border-color 0.3s, background-color 0.3s, color 0.3s, padding-top 0.3s;
+    transition:
+      border-color 0.3s,
+      background-color 0.3s,
+      color 0.3s,
+      padding-top 0.3s;
     background-color: var(--g-sub-sidebar-bg);
 
     &:not(.el-menu--collapse) {
@@ -134,7 +158,6 @@ const getActiveRoute = (route: any): any => {
 
       :deep(.el-menu-item),
       :deep(.el-sub-menu__title) {
-
         span,
         .el-sub-menu__icon-arrow {
           display: none;
@@ -165,7 +188,9 @@ const getActiveRoute = (route: any): any => {
 }
 
 .sub-sidebar-enter-active {
-  transition: opacity 0.3s, transform 0.3s;
+  transition:
+    opacity 0.3s,
+    transform 0.3s;
 }
 
 .sub-sidebar-enter-from,

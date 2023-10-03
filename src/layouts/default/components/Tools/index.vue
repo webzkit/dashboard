@@ -48,7 +48,9 @@
         <el-dropdown-menu class="user-dropdown">
           <el-dropdown-item>Dashboard</el-dropdown-item>
           <el-dropdown-item>Profile</el-dropdown-item>
-          <el-dropdown-item @click.prevent="userStore.logout()">Logout</el-dropdown-item>
+          <el-dropdown-item @click.prevent="userStore.logout()"
+            >Logout</el-dropdown-item
+          >
         </el-dropdown-menu>
       </template>
     </el-dropdown>
@@ -71,30 +73,31 @@ const { refreshTab } = useTabs();
 const { getShowLocalePicker } = useLocale();
 const { toggle, isFullscreen } = useFullscreen();
 const { getColorSchema, setAppSetting } = useAppSetting();
-const {
-  getEnableFullScreen,
-  getEnablePageReload,
-  getEnableColorSchema,
-} = useHeaderSetting();
+const { getEnableFullScreen, getEnablePageReload, getEnableColorSchema } =
+  useHeaderSetting();
 
 const changeColorSchema = function () {
-  setAppSetting({ colorSchema: unref(getColorSchema) === ThemeEnum.DARK ? ThemeEnum.LIGHT : ThemeEnum.DARK });
-}
+  setAppSetting({
+    colorSchema:
+      unref(getColorSchema) === ThemeEnum.DARK
+        ? ThemeEnum.LIGHT
+        : ThemeEnum.DARK,
+  });
+};
 
 const { proxy } = getCurrentInstance() as any;
 const openedDrawerAppSetting = () => {
-  proxy.$eventBus.emit('openDrawerAppSetting');
+  proxy.$eventBus.emit("openDrawerAppSetting");
 };
 
 const fullName = userStore.getInfo.full_name;
-
 </script>
 
 <style lang="scss" scoped>
 .tools {
   display: flex;
   align-items: center;
-  padding: 0 20px;
+  padding: 0 10px 0 20px;
   white-space: nowrap;
 
   .buttons {

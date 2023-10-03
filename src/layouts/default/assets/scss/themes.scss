@@ -5,7 +5,7 @@
 
   --g-main-bg: var(--el-bg-color-page);
 
-  --g-header-bg: #222b45;
+  --g-header-bg: var(--el-color-primary);
 
   --g-header-color: #fff;
 
@@ -13,34 +13,30 @@
 
   --g-header-menu-hover-color: #fff;
 
-  --g-header-menu-hover-bg: #334067;
+  --g-header-menu-hover-bg: var(--el-color-primary-light-1);
 
   --g-header-menu-active-color: #fff;
 
-  --g-header-menu-active-bg: #334067;
+  --g-header-menu-active-bg: var(--el-color-primary-light-1);
 
-  --g-main-sidebar-bg: var(--el-color-primary-light-3);
+  --g-main-sidebar-bg: var(--el-color-primary);
 
   --g-main-sidebar-menu-color: #eee;
 
   --g-main-sidebar-menu-hover-color: #fff;
 
-  --g-main-sidebar-menu-hover-bg: var(--el-color-primary);
+  --g-main-sidebar-menu-hover-bg: var(--el-color-primary-light-1);
 
   --g-main-sidebar-menu-active-color: #fff;
 
-  --g-main-sidebar-menu-active-bg: var(--el-color-primary);
+  --g-main-sidebar-menu-active-bg: var(--el-color-primary-light-1);
 
   --g-sub-sidebar-bg: #fff;
-
-  //--g-sub-sidebar-menu-bg: #e8e8e8;
-  --g-sub-sidebar-menu-bg: #fff;
 
   --g-sub-sidebar-menu-color: var(--el-text-color-primary);
 
   --g-sub-sidebar-menu-hover-color: var(--el-menu-hover-text-color);
 
-  //--g-sub-sidebar-menu-hover-bg: #e1e1e1;
   --g-sub-sidebar-menu-hover-bg: #fff;
 
   --g-sub-sidebar-menu-active-color: var(--el-color-primary);
