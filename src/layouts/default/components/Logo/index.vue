@@ -1,6 +1,11 @@
 <template>
-  <router-link :to="linkRoot" class="title" :class="{ 'is-link': true }" :title="title">
-    <img v-if="showLogo" :src="logo" class="logo">
+  <router-link
+    :to="linkRoot"
+    class="title"
+    :class="{ 'is-link': true }"
+    :title="title"
+  >
+    <img v-if="showLogo" :src="logo" class="logo" />
     <span v-if="showTitle">{{ title }}</span>
   </router-link>
 </template>
@@ -13,13 +18,13 @@ export default defineComponent({
   props: {
     showLogo: {
       type: Boolean,
-      default: true
+      default: true,
     },
 
     showTitle: {
       type: Boolean,
-      default: true
-    }
+      default: true,
+    },
   },
 
   setup() {
@@ -27,16 +32,16 @@ export default defineComponent({
     const logo = ref(imgLogo);
     const linkRoot = computed(() => {
       return {
-        name: 'Dashboard'
-      }
-    })
+        name: "Dashboard",
+      };
+    });
 
     return {
       title,
       logo,
-      linkRoot
-    }
-  }
+      linkRoot,
+    };
+  },
 });
 </script>
 
@@ -60,10 +65,10 @@ export default defineComponent({
   }
 
   .logo {
-    width: 30px;
-    height: 30px;
+    width: 46px;
+    height: 46px;
 
-    &+span {
+    & + span {
       margin-left: 10px;
     }
   }

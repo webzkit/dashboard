@@ -5,7 +5,7 @@
       title="App Setting"
       direction="rtl"
       :size="360"
-      class="setting-drawer"
+      custom-class="setting-drawer"
     >
       <el-divider v-if="isDisplayModePc(getDisplayMode)">Layouts</el-divider>
       <div v-if="isDisplayModePc(getDisplayMode)" class="menu-mode">
@@ -271,6 +271,7 @@ const {
 
 const { proxy } = getCurrentInstance() as any;
 const isOpenedDrawer = ref(false);
+
 onMounted(() => {
   proxy.$eventBus.on("openDrawerAppSetting", () => {
     isOpenedDrawer.value = !isOpenedDrawer.value;

@@ -73,12 +73,12 @@ watch(
 
     document.documentElement.style.setProperty(
       "--g-sidebar-logo-height",
-      height,
+      height
     );
   },
   {
     immediate: true,
-  },
+  }
 );
 </script>
 
@@ -101,9 +101,7 @@ watch(
   width: var(--g-main-sidebar-width);
   color: var(--g-main-sidebar-menu-color);
   background-color: var(--g-main-sidebar-bg);
-  transition:
-    background-color 0.3s,
-    var(--el-transition-color);
+  transition: background-color 0.3s, var(--el-transition-color);
 
   .sidebar-logo {
     transition: 0.3s;
@@ -125,18 +123,37 @@ watch(
       cursor: pointer;
       color: var(--g-main-sidebar-menu-color);
       background-color: var(--g-main-sidebar-bg);
-      transition:
-        background-color 0.3s,
-        var(--el-transition-color);
+      transition: background-color 0.3s, var(--el-transition-color);
+      margin: 0 8px;
+      border-radius: 6px;
+      position: relative;
+      margin-top: 5px;
 
-      &:hover {
-        color: var(--g-main-sidebar-menu-hover-color);
-        background-color: var(--g-main-sidebar-menu-hover-bg);
+      &:before {
+        content: "";
+        opacity: 0;
+        left: 0;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: red;
+        background-color: var(--g-main-sidebar-menu-active-bg);
+        box-shadow: 0 0 0 1px var(--g-main-sidebar-bg);
+        transition: all 0.3s;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
       }
 
+      &:hover,
       &.active {
-        color: var(--g-main-sidebar-menu-active-color);
-        background-color: var(--g-main-sidebar-menu-active-bg);
+        color: var(--g-main-sidebar-menu-hover-color);
+        background-color: var(--g-main-sidebar-menu-hover-bg);
+
+        &::before {
+          opacity: 1;
+          left: -5px;
+        }
       }
 
       .el-icon {

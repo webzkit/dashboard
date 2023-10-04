@@ -16,44 +16,20 @@ const place: AppRouteModule = {
     {
       path: "provinces",
       name: "ProvincePlace",
-      redirect: "/places/provinces/index",
+      component: () => import("/@/views/places/provinces/index.vue"),
       meta: { title: t("routes.place.province.name") },
-      children: [
-        {
-          path: "index",
-          name: "IndexProvincePlace",
-          component: () => import("/@/views/places/provinces/index.vue"),
-          meta: { title: "routes.place.province.index" },
-        },
-      ],
     },
     {
       path: "districts",
       name: "DistrictPlace",
-      redirect: "/places/districts/index",
+      component: () => import("/@/views/places/districts/index.vue"),
       meta: { title: t("routes.place.district.name") },
-      children: [
-        {
-          path: "index",
-          name: "IndexDistrictPlace",
-          component: () => import("/@/views/places/districts/index.vue"),
-          meta: { title: t("routes.place.district.index") },
-        },
-      ],
     },
     {
       path: "wards",
       name: "WardsPlace",
-      redirect: "/places/wards/index",
-      meta: { title: t("routes.place.wards.name") },
-      children: [
-        {
-          path: "index",
-          name: "IndexWardsPlace",
-          component: () => import("/@/views/places/wards/index.vue"),
-          meta: { title: t("routes.place.wards.index") },
-        },
-      ],
+      component: () => import("/@/views/places/wards/index.vue"),
+      meta: { title: t("routes.place.ward.name") },
     },
   ],
 };

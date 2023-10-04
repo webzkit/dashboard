@@ -40,12 +40,12 @@ watch(
   },
   {
     immediate: true,
-  },
+  }
 );
 
 const mainSidebarActualWidth = computed(() => {
   let actualWidth: any = getComputedStyle(
-    document.documentElement,
+    document.documentElement
   ).getPropertyValue("--g-main-sidebar-width");
   actualWidth = parseInt(actualWidth);
 
@@ -76,7 +76,7 @@ watch(
   },
   {
     immediate: true,
-  },
+  }
 );
 
 watch(
@@ -86,7 +86,7 @@ watch(
   },
   {
     immediate: true,
-  },
+  }
 );
 
 watch(
@@ -96,7 +96,7 @@ watch(
   },
   {
     immediate: true,
-  },
+  }
 );
 
 onMounted(() => {
@@ -118,7 +118,7 @@ watch(
   },
   {
     immediate: true,
-  },
+  }
 );
 
 // Listening to page changes and dynamically changing site titles

@@ -1,14 +1,18 @@
 import { CacheTypeEnum } from "/@/enums/cacheEnum";
 
-export type LocaleType = 'vi' | 'en' | 'ja' | 'zh_CN'
+export type LocaleType = "vi" | "en" | "ja" | "zh_CN";
 
-export type designKeys = 'name' | 'value' | 'color';
+export type designKeys = "name" | "value" | "color";
 export type designType = {
-  [key in designKeys]?: string
-}
+  [key in designKeys]?: string;
+};
+export type themeSize = "large" | "default" | "small";
 
-export type NotificationPosition = 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left';
-
+export type NotificationPosition =
+  | "top-right"
+  | "top-left"
+  | "bottom-right"
+  | "bottom-left";
 
 export interface LocaleSetting {
   showPicker: boolean;
@@ -29,15 +33,14 @@ export interface MenuSetting {
   menuMode: string;
 
   // switch the main navigation and jump to the page at the same time
-  switchMainMenuAndPageJump: boolean,
+  switchMainMenuAndPageJump: boolean;
 
   // The default is true
-  subMenuUniqueOpend: boolean,
+  subMenuUniqueOpend: boolean;
 
   // The default value is false
-  subMenuCollapse: boolean,
+  subMenuCollapse: boolean;
 }
-
 
 export interface HeaderSetting {
   // The default value is true
@@ -55,7 +58,6 @@ export interface HeaderSetting {
   // Whether to show the theme switch button
   enableColorSchema: boolean;
 
-
   enableMultiTab: boolean;
   enableCacheMultiTab: boolean;
 
@@ -66,23 +68,21 @@ export interface HeaderSetting {
   enableDoc?: boolean;
 }
 
-
 export interface FooterSetting {
-  enableCopyright: boolean,
-  date: string,
-  company: string,
-  website: string,
+  enableCopyright: boolean;
+  date: string;
+  company: string;
+  website: string;
 }
 
 export interface ElePlusSetting {
-  duration: number,
-  notificatonPosition: NotificationPosition,
+  duration: number;
+  notificatonPosition: NotificationPosition;
 }
-
 
 export interface ProjectConfig {
   // The default value is frontend
-  routeBaseOn: string,
+  routeBaseOn: string;
 
   // The default value is light
   colorSchema: string;
@@ -94,7 +94,7 @@ export interface ProjectConfig {
   displayMode: string;
 
   // The element plus size and value default is Default
-  themeSize: string;
+  themeSize: themeSize;
 
   // The color of theme
   themeColor: string;
