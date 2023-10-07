@@ -60,7 +60,7 @@ const props = defineProps({
 
   pageLayout: {
     type: String,
-    default: "total, sizes, prev, pager, next, jumper",
+    default: "total, sizes, -> , prev, pager, next, jumper",
   },
   pageSizes: { type: Array<any>, default: () => [10, 20, 40, 80, 100, 200] },
 });
@@ -74,11 +74,26 @@ const handleSizeChange = (val: Number) => {
   props.page.size = val;
 };
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
+.el-pagination {
+  margin-top: 8px;
+  padding: 0;
+
+  .el-pagination__sizes {
+    margin-left: 0;
+  }
+}
+
 .el-pagination__rightwrapper {
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: flex-end;
+
+  .el-pagination__jump {
+    .el-pagination__editor {
+      margin-right: 0 !important;
+    }
+  }
 }
 </style>
