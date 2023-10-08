@@ -1,5 +1,5 @@
 <template>
-  <div class="page-main">
+  <div class="page-main" id="page-main">
     <slot />
   </div>
 </template>
@@ -14,11 +14,11 @@ export default defineComponent({});
 .page-main {
   position: absolute;
   margin: 15px;
-  padding: 10px 15px;
+  padding: 15px 15px;
   background-color: var(--g-app-bg);
   transition: background-color 0.3s;
   width: calc(100% - 30px);
-  height: 100%;
+  height: calc(100% - var(--g-topbar-height) - 15px);
 
   &.is-collaspe {
     overflow: hidden;

@@ -1,15 +1,9 @@
 <template>
   <div class="system-table-box text-blue">
-    <el-table
-      v-bind="$attrs"
-      border
-      height="100%"
-      :data="props.data"
-      class="system-table"
-    >
+    <el-table v-bind="$attrs" :data="props.data" class="system-table">
       <el-table-column
         type="selection"
-        align="center"
+        align="left"
         width="50"
         v-if="props.showSelection"
       >
@@ -27,20 +21,20 @@
       <slot></slot>
     </el-table>
 
-    <el-pagination
-      background
-      :layout="props.pageLayout"
-      :total="props.page.total"
-      :pager-count="5"
-      v-model:current-page="props.page.index"
-      :page-size="props.page.size"
-      :pageSizes="props.pageSizes"
-      @current-change="handleCurrentChange"
-      @size-change="handleSizeChange"
-      :popper-class="`this-is-test`"
-    >
-      <div key="1" class="abc">jumper</div>
-    </el-pagination>
+    <div class="paginate-wrap">
+      <el-pagination
+        background
+        :layout="props.pageLayout"
+        :total="props.page.total"
+        :pager-count="5"
+        v-model:current-page="props.page.index"
+        :page-size="props.page.size"
+        :pageSizes="props.pageSizes"
+        @current-change="handleCurrentChange"
+        @size-change="handleSizeChange"
+      >
+      </el-pagination>
+    </div>
   </div>
 </template>
 
@@ -75,24 +69,45 @@ const handleSizeChange = (val: Number) => {
 };
 </script>
 <style lang="scss">
-.el-pagination {
-  margin-top: 8px;
-  padding: 0;
+.system-table-box {
+  position: relative;
+  height: 100%;
 
-  .el-pagination__sizes {
-    margin-left: 0;
+  .system-table {
+    height: calc(100% - 45px);
+
+    .el-table__inner-wrapper::before {
+      background: transparent;
+    }
+
+    tbody {
+      .el-table__row {
+        &:nth-child(odd) {
+          background: #fafafa;
+        }
+      }
+    }
   }
-}
 
-.el-pagination__rightwrapper {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
+  .el-pagination {
+    margin-top: 15px;
+    padding: 0;
 
-  .el-pagination__jump {
-    .el-pagination__editor {
-      margin-right: 0 !important;
+    .el-pagination__sizes {
+      margin-left: 0;
+    }
+  }
+
+  .el-pagination__rightwrapper {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    .el-pagination__jump {
+      .el-pagination__editor {
+        margin-right: 0 !important;
+      }
     }
   }
 }
