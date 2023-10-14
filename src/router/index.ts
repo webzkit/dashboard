@@ -9,7 +9,7 @@ import { RouteBaseOnEnum } from "../enums/appEnum";
 import { get } from "lodash";
 import { useUserStore } from "../store/modules/user";
 import { LOGIN_NAME_ROUTE } from "./constant";
-
+import { useMenuStore } from "../store/modules/menu";
 
 export const router = createRouter({
   history: createWebHashHistory(import.meta.env.VITE_PUBLIC_PATH),
@@ -22,6 +22,7 @@ export const router = createRouter({
 router.beforeEach(async (to, form, next) => {
   const appSetting = useAppSetting();
   const routeSetting = useRouteSetting();
+  const { setActived } = useMenuStore();
   const { getAccessToken } = useUserStore();
 
   if (!getAccessToken) {
@@ -29,17 +30,18 @@ router.beforeEach(async (to, form, next) => {
       return next({
         name: LOGIN_NAME_ROUTE,
         query: {
-          redirect: to.fullPath
-        }
-      })
+          redirect: to.fullPath,
+        },
+      });
     }
 
     return next();
   }
 
   if (routeSetting.getIsGenerate.value) {
+    setActived(to.path);
     // todo
-    return next()
+    return next();
   }
 
   switch (appSetting.getRouteBaseOn.value) {
@@ -55,19 +57,21 @@ router.beforeEach(async (to, form, next) => {
   }
 
   let removeRoutes: string[] = [];
-  routeSetting.routeStore.getFlatRoutes.forEach(route => {
-    if (!/^(https?:|mailto:|tel:)/.test(get(route, 'path', ""))) {
+  routeSetting.routeStore.getFlatRoutes.forEach((route) => {
+    if (!/^(https?:|mailto:|tel:)/.test(get(route, "path", ""))) {
       // @ts-ignore
-      removeRoutes.push(router.addRoute(route))
+      removeRoutes.push(router.addRoute(route));
     }
-  })
+  });
 
   routeSetting.routeStore.setCurrentRemoveRoute(removeRoutes);
 
   next({
-    path: to.fullPath, query: to.query, replace: true
+    path: to.fullPath,
+    query: to.query,
+    replace: true,
   });
-})
+});
 
 // config router
 export function setupRouter(app: App<Element>) {

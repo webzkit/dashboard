@@ -113,7 +113,7 @@ header {
     }
 
     span {
-      font-size: 20px;
+      font-size: 16px;
       letter-spacing: 1px;
       color: var(--g-header-color);
     }
@@ -122,30 +122,50 @@ header {
   .nav {
     display: flex;
     height: 100%;
-    margin-left: 50px;
+    margin-left: 32px;
 
     .item {
       display: flex;
       align-items: center;
       justify-content: center;
       flex-direction: column;
-      padding: 0 5px;
+      padding: 0 0;
+      margin: 5px;
       width: 80px;
+      border-radius: 6px;
       cursor: pointer;
       color: var(--g-header-menu-color);
       background-color: var(--g-header-bg);
       transition:
         background-color 0.3s,
         var(--el-transition-color);
+      position: relative;
 
-      &:hover {
-        color: var(--g-header-menu-hover-color);
-        background-color: var(--g-header-menu-hover-bg);
+      &:before {
+        content: "";
+        opacity: 0;
+        left: 0;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: red;
+        background-color: var(--g-main-sidebar-menu-active-bg);
+        box-shadow: 0 0 0 1px var(--g-main-sidebar-bg);
+        transition: all 0.3s;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
       }
 
+      &:hover,
       &.active {
-        color: var(--g-header-menu-active-color);
-        background-color: var(--g-header-menu-active-bg);
+        color: var(--g-header-menu-hover-color);
+        background-color: var(--g-header-menu-hover-bg);
+
+        &::before {
+          opacity: 1;
+          left: -5px;
+        }
       }
 
       .el-icon {
