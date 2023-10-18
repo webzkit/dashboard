@@ -4,12 +4,12 @@
       ref="table"
       :show-selection="showSelection"
       :show-index="showIndex"
-      :data="tableData"
+      :data="[...tableData, ...tableData, ...tableData]"
     >
       <el-table-column prop="name" label="Name" />
       <el-table-column prop="address" label="Address" />
       <el-table-column prop="date" label="Date" />
-      <el-table-column label="Option" align="center" fixed="right" width="200">
+      <el-table-column label="Option" align="center" width="200">
         <template #default="scope">
           <el-button @click="handleUpdate(scope.row)" type="info" plain circle>
             <el-icon><icon-ep-edit /></el-icon>

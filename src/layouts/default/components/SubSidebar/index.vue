@@ -142,6 +142,7 @@ const getActiveRoute = (route: any): any => {
       color 0.3s,
       padding-top 0.3s;
     background-color: var(--g-sub-sidebar-bg);
+    width: 100%;
 
     &:not(.el-menu--collapse) {
       width: inherit;
