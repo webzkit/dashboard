@@ -1,8 +1,7 @@
-import { LoginParams } from "./type";
-import request from '/@/utils/http/axios/index';
-import qs from "qs";
-import { ContentTypeEnum, RequestEnum } from "/@/enums/httpEnum";
-
+import { LoginParams } from './type';
+import service from '/@/utils/http/axios/index';
+import qs from 'qs';
+import { ContentTypeEnum, RequestEnum } from '/@/enums/httpEnum';
 
 enum Api {
   LOGIN = '/oauth/login',
@@ -10,27 +9,25 @@ enum Api {
   ME = '/oauth/me',
 }
 
-
 export function loginApi(params: LoginParams) {
-  return request({
+  return service({
     url: Api.LOGIN,
     method: RequestEnum.POST,
     headers: { 'Content-Type': ContentTypeEnum.FORM_URLENCODED },
-    data: qs.stringify(params)
+    data: qs.stringify(params),
   });
 }
 
 export function logoutApi() {
-  return request({
+  return service({
     url: Api.LOGOUT,
-    method: RequestEnum.POST
+    method: RequestEnum.POST,
   });
 }
 
 export const getUserInfo = () => {
-  return request({
+  return service({
     url: Api.ME,
     method: RequestEnum.GET,
   });
-}
-
+};

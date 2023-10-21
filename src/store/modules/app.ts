@@ -1,13 +1,18 @@
-import type { ProjectConfig, HeaderSetting, MenuSetting, FooterSetting, ElePlusSetting } from "/#/config";
-import type { BeforeMiniState } from "/#/store";
+import type {
+  ProjectConfig,
+  HeaderSetting,
+  MenuSetting,
+  FooterSetting,
+  ElePlusSetting,
+} from '/#/config';
+import type { BeforeMiniState } from '/#/store';
 
-import { defineStore } from "pinia";
-import { store } from "/@/store";
-import { PROJ_CFG_KEY } from "/@/enums/cacheEnum";
+import { defineStore } from 'pinia';
+import { store } from '/@/store';
+import { PROJ_CFG_KEY } from '/@/enums/cacheEnum';
 import { Persistent } from '/@/utils/cache/persistent';
 import { deepMerge } from '/@/utils';
-import { DisplayModeEnum } from "/@/enums/appEnum";
-
+import { DisplayModeEnum } from '/@/enums/appEnum';
 
 interface AppState {
   // project config
@@ -16,7 +21,6 @@ interface AppState {
   // When the window shrinks, remember some states, and restore these states when the window is restored
   beforeMiniInfo: BeforeMiniState;
 }
-
 
 export const useAppStore = defineStore({
   id: 'app',
@@ -48,7 +52,7 @@ export const useAppStore = defineStore({
 
     getElePlusSetting(): ElePlusSetting {
       return this.getProjectConfig.elePlusSetting;
-    }
+    },
   },
 
   actions: {
@@ -58,11 +62,15 @@ export const useAppStore = defineStore({
 
     setMode(width: number) {
       if (this.getProjectConfig.enableMobile) {
-        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-          this.setProjectConfig({ displayMode: DisplayModeEnum.MOBILE })
+        if (
+          /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+            navigator.userAgent,
+          )
+        ) {
+          this.setProjectConfig({ displayMode: DisplayModeEnum.MOBILE });
         } else {
           if (width < 992) {
-            this.setProjectConfig({ displayMode: DisplayModeEnum.MOBILE })
+            this.setProjectConfig({ displayMode: DisplayModeEnum.MOBILE });
           } else {
             this.setProjectConfig({ displayMode: DisplayModeEnum.PC });
           }
@@ -80,9 +88,8 @@ export const useAppStore = defineStore({
     async resetAllState() {
       Persistent.clearAll();
     },
-  }
+  },
 });
-
 
 export function useAppStoreWithOut() {
   return useAppStore(store);

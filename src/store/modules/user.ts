@@ -1,12 +1,16 @@
-import { ElNotification } from "element-plus";
-import { defineStore } from "pinia";
-import type { UserInfo } from "/#/store";
-import { LoginParams } from "/@/api/sys/type";
-import { getUserInfo, loginApi, logoutApi } from "/@/api/sys/user";
-import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY, USER_INFO_KEY } from "/@/enums/cacheEnum";
-import { router } from "/@/router";
-import { DASHBOARD_NAME_ROUTE, LOGIN_NAME_ROUTE } from "/@/router/constant";
-import { getAuthCache, setAuthCache } from "/@/utils/auth";
+import { ElNotification } from 'element-plus';
+import { defineStore } from 'pinia';
+import type { UserInfo } from '/#/store';
+import { LoginParams } from '/@/api/sys/type';
+import { getUserInfo, loginApi, logoutApi } from '/@/api/sys/user';
+import {
+  ACCESS_TOKEN_KEY,
+  REFRESH_TOKEN_KEY,
+  USER_INFO_KEY,
+} from '/@/enums/cacheEnum';
+import { router } from '/@/router';
+import { DASHBOARD_NAME_ROUTE, LOGIN_NAME_ROUTE } from '/@/router/constant';
+import { getAuthCache, setAuthCache } from '/@/utils/auth';
 
 interface UserState {
   info: Nullable<UserInfo>;
@@ -16,7 +20,6 @@ interface UserState {
   lastUpdateTime: number;
 }
 
-
 export const useUserStore = defineStore({
   id: 'app-user',
 
@@ -25,7 +28,7 @@ export const useUserStore = defineStore({
     accessToken: undefined,
     refreshToken: undefined,
     sessionTimeout: false,
-    lastUpdateTime: 0
+    lastUpdateTime: 0,
   }),
 
   getters: {
@@ -75,46 +78,52 @@ export const useUserStore = defineStore({
 
     async login(parrams: LoginParams) {
       try {
-        await loginApi(parrams).then(response => {
-          if (response.data.status) {
-            this.setAccessToken(response.data.access_token);
-            this.setRefreshToken(response.data.refresh_token);
+        await loginApi(parrams)
+          .then(response => {
+            if (response.data.status) {
+              this.setAccessToken(response.data.access_token);
+              this.setRefreshToken(response.data.refresh_token);
 
-            ElNotification.success({
-              title: 'Notification',
-              message: response.data.message || 'Notification',
-              duration: 3000,
-              position: 'bottom-right'
-            });
+              ElNotification.success({
+                title: 'Notification',
+                message: response.data.message || 'Notification',
+                duration: 3000,
+                position: 'bottom-right',
+              });
 
-            this.afterLogin();
-            return router.push({ name: DASHBOARD_NAME_ROUTE });
-          }
-        }).catch(error => {
-          console.log(error)
-        });
+              this.afterLogin();
+              return router.push({ name: DASHBOARD_NAME_ROUTE });
+            }
+          })
+          .catch(error => {
+            console.log(error);
+          });
       } catch (error) {
-        return Promise.reject(error)
+        return Promise.reject(error);
       }
     },
 
     async logout() {
       if (this.getAccessToken) {
-        try {
-          await logoutApi().then(res => {
-            if (res.data.status) {
-              this.setInfo(null);
-              this.setAccessToken(undefined);
-              this.setRefreshToken(undefined);
-              this.setSessionTimeout(false);
+        console.log(this.getAccessToken);
 
-              return router.push({ name: LOGIN_NAME_ROUTE })
-            }
-          }).catch(err => {
-            console.log(err)
-          })
+        try {
+          await logoutApi()
+            .then(res => {
+              if (res.data.status) {
+                this.setInfo(null);
+                this.setAccessToken(undefined);
+                this.setRefreshToken(undefined);
+                this.setSessionTimeout(false);
+
+                return router.push({ name: LOGIN_NAME_ROUTE });
+              }
+            })
+            .catch(err => {
+              console.log(err);
+            });
         } catch {
-          console.log('Error Token')
+          console.log('Error Token');
         }
       }
     },
@@ -139,11 +148,13 @@ export const useUserStore = defineStore({
 
     async fetchUserInfo() {
       if (!this.getAccessToken) return null;
-      const userInfo = await getUserInfo().then(response => {
-        return response.data.item;
-      }).catch(error => {
-        console.log(error)
-      });
+      const userInfo = await getUserInfo()
+        .then(response => {
+          return response.data.item;
+        })
+        .catch(error => {
+          console.log(error);
+        });
 
       return userInfo;
     },
@@ -154,6 +165,5 @@ export const useUserStore = defineStore({
       this.refreshToken = '';
       this.sessionTimeout = false;
     },
-  }
+  },
 });
-

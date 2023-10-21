@@ -1,5 +1,8 @@
-export type ErrorMessageMode = 'alert' | 'notification' | 'message' | 'message_box';
-
+export type ErrorMessageMode =
+  | 'alert'
+  | 'notification'
+  | 'message'
+  | 'message_box';
 
 export interface Result<T = any> {
   code: number;
@@ -7,4 +10,3 @@ export interface Result<T = any> {
   message: string;
   result: T;
 }
-

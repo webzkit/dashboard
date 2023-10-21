@@ -1,8 +1,8 @@
-import type { LocaleSetting, LocaleType } from "/#/config";
+import type { LocaleSetting, LocaleType } from '/#/config';
 
 export const LOCALE: { [key: string]: LocaleType } = {
-  VI_VN: "vi",
-  EN_US: "en",
+  VI_VN: 'vi',
+  EN_US: 'en',
 };
 
 export const localeSetting: LocaleSetting = {
@@ -21,11 +21,11 @@ export const localeSetting: LocaleSetting = {
 // locale list
 export const localeList: any[] = [
   {
-    text: "Vietnamese",
+    text: 'Vietnamese',
     locale: LOCALE.VI_VN,
   },
   {
-    text: "English",
+    text: 'English',
     locale: LOCALE.EN_US,
   },
 ];

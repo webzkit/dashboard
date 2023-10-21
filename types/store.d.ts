@@ -13,3 +13,4 @@ export interface UserInfo {
   avatar?: string;
 }
 
+export interface BeforeMiniState {}

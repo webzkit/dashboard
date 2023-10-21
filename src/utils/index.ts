@@ -1,36 +1,38 @@
-import { App, Plugin } from "vue";
+import { App, Plugin } from 'vue';
 import { isObject } from '/@/utils/is';
-import path from "path-browserify";
-import { RouteLocationNormalized } from "vue-router";
+import path from 'path-browserify';
+import { RouteLocationNormalized } from 'vue-router';
 
 export function isExternalLink(path: string) {
-  return /^(https?:|mailto:|tel:)/.test(path)
+  return /^(https?:|mailto:|tel:)/.test(path);
 }
 
 export function resolveRoutePath(basePath: string, routePath: string) {
   if (isExternalLink(routePath)) {
-    return routePath
+    return routePath;
   }
 
   if (isExternalLink(basePath)) {
-    return basePath
+    return basePath;
   }
 
-  return basePath ? path.resolve(basePath, routePath) : routePath
+  return basePath ? path.resolve(basePath, routePath) : routePath;
 }
-
 
 export function deepMerge<T = any>(src: any = {}, target: any = {}): T {
   let key: string;
   for (key in target) {
-    src[key] = isObject(src[key]) ? deepMerge(src[key], target[key]) : (src[key] = target[key]);
+    src[key] = isObject(src[key])
+      ? deepMerge(src[key], target[key])
+      : (src[key] = target[key]);
   }
 
   return src;
 }
 
-
-export function getRawRoute(route: RouteLocationNormalized): RouteLocationNormalized {
+export function getRawRoute(
+  route: RouteLocationNormalized,
+): RouteLocationNormalized {
   if (!route) return route;
 
   const { matched, ...opt } = route;
@@ -38,17 +40,15 @@ export function getRawRoute(route: RouteLocationNormalized): RouteLocationNormal
   return {
     ...opt,
 
-    //@ts-ignore
     matched: (matched
-      ? matched.map((item) => ({
-        meta: item.meta,
-        name: item.name,
-        path: item.path
-      }))
-      : undefined) as RouteLocationNormalized[]
+      ? matched.map(item => ({
+          meta: item.meta,
+          name: item.name,
+          path: item.path,
+        }))
+      : undefined) as RouteLocationNormalized[],
   };
 }
-
 
 export const withInstall = <T>(component: T, alias?: string) => {
   const comp = component as any;
@@ -60,5 +60,4 @@ export const withInstall = <T>(component: T, alias?: string) => {
   };
 
   return component as T & Plugin;
-}
-
+};

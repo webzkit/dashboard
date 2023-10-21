@@ -1,21 +1,18 @@
-import path from "path";
-import { defineStore } from "pinia";
-import { toRaw, unref } from "vue";
-import { RouteLocationNormalized, RouteLocationRaw, Router } from "vue-router";
-import { MULTIPLE_TABS_KEY } from "/@/enums/cacheEnum";
-import { PageEnum } from "/@/enums/pageEnum";
-import { useRedo } from "/@/hooks/web/usePage";
-import { DASHBOARD_NAME_ROUTE, REDIRECT_NAME_ROUTE } from "/@/router/constant";
+import { defineStore } from 'pinia';
+import { toRaw, unref } from 'vue';
+import { RouteLocationNormalized, RouteLocationRaw, Router } from 'vue-router';
+import { MULTIPLE_TABS_KEY } from '/@/enums/cacheEnum';
+import { PageEnum } from '/@/enums/pageEnum';
+import { useRedo } from '/@/hooks/web/usePage';
+import { DASHBOARD_NAME_ROUTE, REDIRECT_NAME_ROUTE } from '/@/router/constant';
 import projectSetting from '/@/settings/projectSetting';
-import { getRawRoute } from "/@/utils";
-import { Persistent } from "/@/utils/cache/persistent";
-
+import { getRawRoute } from '/@/utils';
+import { Persistent } from '/@/utils/cache/persistent';
 
 interface MultiTabState {
-  routeName: Set<string>,
+  routeName: Set<string>;
   routeMultiTabs: RouteLocationNormalized[];
 }
-
 
 const cacheTab = projectSetting.headerSetting.enableCacheMultiTab;
 
@@ -25,10 +22,9 @@ const goToTarget = (route: RouteLocationNormalized) => {
   return {
     params: params || {},
     path,
-    query: query || {}
-  }
+    query: query || {},
+  };
 };
-
 
 export const useMultiTabStore = defineStore({
   id: 'app-multi-tab',
@@ -36,8 +32,9 @@ export const useMultiTabStore = defineStore({
   state: (): MultiTabState => ({
     routeName: new Set(),
 
-    // @ts-ignore
-    routeMultiTabs: cacheTab ? Persistent.getLocal(MULTIPLE_TABS_KEY) || [] : [],
+    routeMultiTabs: cacheTab
+      ? Persistent.getLocal(MULTIPLE_TABS_KEY as any) || []
+      : [],
   }),
 
   getters: {
@@ -47,7 +44,7 @@ export const useMultiTabStore = defineStore({
 
     getRouteName(): string[] {
       return Array.from(this.routeName);
-    }
+    },
   },
 
   actions: {
@@ -67,8 +64,11 @@ export const useMultiTabStore = defineStore({
 
       this.routeName = cacheMap;
 
-      //@ts-ignore
-      cacheTab && Persistent.setLocal(MULTIPLE_TABS_KEY, this.routeMultiTabs);
+      cacheTab &&
+        Persistent.setLocal(
+          MULTIPLE_TABS_KEY as any,
+          this.routeMultiTabs as any,
+        );
     },
 
     clearCacheTab(): void {
@@ -85,7 +85,7 @@ export const useMultiTabStore = defineStore({
       const route = unref(currentRoute);
       const name = route.name;
 
-      const findTab = this.getRouteName.find((item) => item === name);
+      const findTab = this.getRouteName.find(item => item === name);
       if (findTab) {
         this.routeName.delete(findTab);
       }
@@ -97,10 +97,7 @@ export const useMultiTabStore = defineStore({
     async addTab(route: RouteLocationNormalized) {
       const { path, fullPath, name, params, query } = getRawRoute(route);
 
-      if (
-        path === PageEnum.BASE_LOGIN ||
-        name === REDIRECT_NAME_ROUTE
-      ) {
+      if (path === PageEnum.BASE_LOGIN || name === REDIRECT_NAME_ROUTE) {
         return;
       }
 
@@ -122,7 +119,7 @@ export const useMultiTabStore = defineStore({
         curTab.fullPath = fullPath || curTab.fullPath;
         this.routeMultiTabs.splice(updateIndex, 1, curTab);
       } else {
-        this.routeMultiTabs.push(getRawRoute(route))
+        this.routeMultiTabs.push(getRawRoute(route));
       }
 
       this.updateCacheTab();
@@ -136,7 +133,9 @@ export const useMultiTabStore = defineStore({
           return;
         }
 
-        const index = this.routeMultiTabs.findIndex((item) => item.fullPath === fullPath);
+        const index = this.routeMultiTabs.findIndex(
+          item => item.fullPath === fullPath,
+        );
         index !== -1 && this.routeMultiTabs.splice(index, 1);
       };
 
@@ -150,7 +149,7 @@ export const useMultiTabStore = defineStore({
 
       // Closed is activated tab
       let toTarget: RouteLocationRaw = {};
-      const index = this.routeMultiTabs.findIndex((item) => item.path === path);
+      const index = this.routeMultiTabs.findIndex(item => item.path === path);
 
       // If the current is the leftmost tab
       if (index === 0) {
@@ -178,18 +177,18 @@ export const useMultiTabStore = defineStore({
     },
 
     async closeOtherTab(route: RouteLocationNormalized) {
-      const closePaths = this.routeMultiTabs.map((item) => item.fullPath);
+      const closePaths = this.routeMultiTabs.map(item => item.fullPath);
       const paths: string[] = [];
       for (const path of closePaths) {
         if (path !== route.fullPath) {
-          const closeTab = this.routeMultiTabs.find((item) => item.path === path);
+          const closeTab = this.routeMultiTabs.find(item => item.path === path);
           if (!closeTab) {
             continue;
           }
 
           const affix = closeTab.path === PageEnum.BASE_HOME;
           if (!affix) {
-            paths.push(closeTab.fullPath)
+            paths.push(closeTab.fullPath);
           }
         }
       }
@@ -199,7 +198,9 @@ export const useMultiTabStore = defineStore({
     },
 
     async closeLeftTab(route: RouteLocationNormalized) {
-      const index = this.getRouteMultiTabs.findIndex((item) => item.fullPath === route.fullPath);
+      const index = this.getRouteMultiTabs.findIndex(
+        item => item.fullPath === route.fullPath,
+      );
 
       if (index > 0) {
         const leftTabs = this.routeMultiTabs.slice(0, index);
@@ -218,9 +219,14 @@ export const useMultiTabStore = defineStore({
     },
 
     async closeRightTab(route: RouteLocationNormalized) {
-      const index = this.routeMultiTabs.findIndex((item) => item.fullPath === route.fullPath);
+      const index = this.routeMultiTabs.findIndex(
+        item => item.fullPath === route.fullPath,
+      );
       if (index >= 0 && index < this.routeMultiTabs.length - 1) {
-        const rightTabs = this.routeMultiTabs.slice(index + 1, this.routeMultiTabs.length);
+        const rightTabs = this.routeMultiTabs.slice(
+          index + 1,
+          this.routeMultiTabs.length,
+        );
 
         const paths: string[] = [];
         for (const tab of rightTabs) {
@@ -237,8 +243,9 @@ export const useMultiTabStore = defineStore({
     },
 
     async closeWithTabs(paths: string[]) {
-      this.routeMultiTabs = this.routeMultiTabs.filter((item) => !paths.includes(item.fullPath));
-    }
-  }
+      this.routeMultiTabs = this.routeMultiTabs.filter(
+        item => !paths.includes(item.fullPath),
+      );
+    },
+  },
 });
-

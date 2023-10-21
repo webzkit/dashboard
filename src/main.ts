@@ -1,11 +1,11 @@
-import { createApp } from "vue";
+import { createApp } from 'vue';
 
-import App from "./App.vue";
-import { setupStore } from "/@/store";
-import { initAppConfigStore } from "/@/settings/initAppConfig";
-import { globalProperties } from "/@/settings/globalProperties";
-import { setupRouter } from "/@/router";
-import { setupI18n } from "/@/locales/setupI18n";
+import App from './App.vue';
+import { setupStore } from '/@/store';
+import { initAppConfigStore } from '/@/settings/initAppConfig';
+import { globalProperties } from '/@/settings/globalProperties';
+import { setupRouter } from '/@/router';
+import { setupI18n } from '/@/locales/setupI18n';
 
 async function initApplication() {
   const app = createApp(App);
@@ -27,11 +27,11 @@ async function initApplication() {
   globalProperties(app);
 
   // app.use(ElementPlus);
-  app.mount("#app");
+  app.mount('#app');
 }
 
 //init css
-import "/@/layouts/default/assets/scss/globals.scss";
+import '/@/layouts/default/assets/scss/globals.scss';
 //import "element-plus/dist/index.css";
 
 initApplication();

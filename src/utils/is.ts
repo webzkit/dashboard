@@ -51,18 +51,26 @@ export function isNullOrUnDef(val: unknown): val is null | undefined {
 export function isNumber(val: unknown): val is number {
   return is(val, 'Number');
 }
-
+/*
 export function isPromise<T = any>(val: unknown): val is Promise<T> {
-  return is(val, 'Promise') && isObject(val) && isFunction(val.then) && isFunction(val.catch);
+  return (
+    is(val, 'Promise') &&
+    isObject(val) &&
+    isFunction(val.then) &&
+    isFunction(val.catch)
+  );
 }
+*/
 
 export function isString(val: unknown): val is string {
   return is(val, 'String');
 }
 
+/*
 export function isFunction(val: unknown): val is Function {
   return typeof val === 'function';
 }
+*/
 
 export function isBoolean(val: unknown): val is boolean {
   return is(val, 'Boolean');
@@ -92,8 +100,10 @@ export const isServer = typeof window === 'undefined';
 
 export const isClient = !isServer;
 
+/*
 export function isUrl(path: string): boolean {
   const reg =
     /^(((^https?:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+(?::\d+)?|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?(\/#\/)?(?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)$/;
   return reg.test(path);
 }
+*/

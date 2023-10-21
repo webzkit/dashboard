@@ -5,7 +5,6 @@ export default {
 
   posts: {
     list: 'Danh sách bài viết',
-    create: 'Thêm bài viết'
-  }
+    create: 'Thêm bài viết',
+  },
 };
-

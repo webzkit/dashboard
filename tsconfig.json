@@ -10,34 +10,22 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "allowJs": true,
+    "noEmit": true,
     "sourceMap": true,
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "noUnusedLocals": false,
     "noUnusedParameters": true,
     "experimentalDecorators": true,
-    "lib": [
-      "dom",
-      "esnext"
-    ],
-    "types": [
-      "vite/client",
-      "element-plus/global",
-      "unplugin-icons/types/vue"
-    ],
-    "typeRoots": [
-      "./node_modules/@types/",
-      "./types"
-    ],
+    "lib": ["dom", "esnext"],
+    "types": ["vite/client", "element-plus/global", "unplugin-icons/types/vue"],
+    "typeRoots": ["./node_modules/@types/", "./types"],
     "noImplicitAny": false,
     "skipLibCheck": true,
     "paths": {
-      "/@/*": [
-        "src/*"
-      ],
-      "/#/*": [
-        "types/*"
-      ]
+      "/@/*": ["src/*"],
+      "/@build/*": ["build/*"],
+      "/#/*": ["types/*"]
     }
   },
   "include": [
@@ -55,9 +43,5 @@
       "path": "./tsconfig.node.json"
     }
   ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "**/*.js"
-  ]
+  "exclude": ["node_modules", "dist", "**/*.js"]
 }

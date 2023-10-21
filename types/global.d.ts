@@ -1,5 +1,5 @@
 import type {
-  ComponentRenderProxy,
+  //ComponentRenderProxy,
   ComponentPublicInstance,
   FunctionalComponent,
 } from 'vue';
@@ -13,7 +13,7 @@ declare global {
       devDependencies: Recordable<string>;
     };
     lastBuildTime: string;
-  }
+  };
 
   // vue
   declare type PropType<T> = VuePropType<T>;
@@ -51,6 +51,6 @@ declare global {
 
 declare module 'vue' {
   export type JSXComponent<Props = any> =
-    | { new(): ComponentPublicInstance<Props> }
+    | { new (): ComponentPublicInstance<Props> }
     | FunctionalComponent<Props>;
 }

@@ -6,30 +6,29 @@ export enum ThemeEnum {
 
 // Generate route base on
 export enum RouteBaseOnEnum {
-  FRONTEND = "frontend",
-  BACKEND = "backend",
-  FILE_SYSTEM = "filesystem"
+  FRONTEND = 'frontend',
+  BACKEND = 'backend',
+  FILE_SYSTEM = 'filesystem',
 }
 
 // MenuMode
 export enum MenuModeEnum {
-  SINGLE = "single",
-  SIDE = "side",
-  HEAD = "head"
+  SINGLE = 'single',
+  SIDE = 'side',
+  HEAD = 'head',
 }
-
 
 // Display mode support Pc and mobile
 export enum DisplayModeEnum {
   PC = 'pc',
-  MOBILE = 'mobile'
+  MOBILE = 'mobile',
 }
 
 // The size of element plus
 export enum ThemeSizeEnum {
-  LARGE = "large",
-  DEFAULT = "default",
-  SMALL = "small"
+  LARGE = 'large',
+  DEFAULT = 'default',
+  SMALL = 'small',
 }
 
 export enum MenuWidthEnum {
@@ -48,4 +47,3 @@ export enum TabActionEnum {
   CLOSE_CURRENT,
   CLOSE,
 }
-

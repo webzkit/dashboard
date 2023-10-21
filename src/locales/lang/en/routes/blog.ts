@@ -5,7 +5,6 @@ export default {
 
   posts: {
     list: 'List posts',
-    create: 'Create post'
-  }
+    create: 'Create post',
+  },
 };
-

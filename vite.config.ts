@@ -1,18 +1,19 @@
-import type { UserConfig, ConfigEnv } from "vite";
-import pkg from "./package.json";
+import type { UserConfig, ConfigEnv } from 'vite';
+
+import pkg from './package.json';
 import moment from 'moment';
-import { loadEnv } from "vite";
-import { resolve } from "path";
-import { createVitePlugin } from "./build/vite/plugin";
-import { wrapperEnv } from "./build/utils";
-import { createProxy } from "./build/vite/proxy";
-import { createPreprocessor } from "./build/vite/preprocessor";
+import { loadEnv } from 'vite';
+import { resolve } from 'path';
+import { createVitePlugin } from './build/vite/plugin';
+import { wrapperEnv } from './build/utils';
+import { createProxy } from './build/vite/proxy';
+import { createPreprocessor } from './build/vite/preprocessor';
 
 function pathResolve(dir: string) {
-  return resolve(process.cwd(), '.', dir)
+  return resolve(process.cwd(), '.', dir);
 }
 
-const { dependencies, devDependencies, name, version } = pkg
+const { dependencies, devDependencies, name, version } = pkg;
 const __APP_INFO__ = {
   pkg: { dependencies, devDependencies, name, version },
   lastBuildTime: moment().format('YYYY-MM-DD HH:mm:ss'),
@@ -20,7 +21,8 @@ const __APP_INFO__ = {
 
 export default ({ command, mode }: ConfigEnv): UserConfig => {
   const root = process.cwd();
-  const env = loadEnv(mode, root)
+  const env = loadEnv(mode, root);
+
   const viteEnv = wrapperEnv(env);
   const { VITE_PORT, VITE_PUBLIC_PATH, VITE_PROXY } = viteEnv;
 
@@ -42,8 +44,12 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
         {
           find: /\/#\//,
           replacement: pathResolve('types') + '/',
-        }
-      ]
+        },
+        {
+          find: /\/@build\//,
+          replacement: pathResolve('build') + '/',
+        },
+      ],
     },
 
     server: {
@@ -56,7 +62,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       // Suppress warning
       __INTLIFY_PROD_DEVTOOLS__: false,
       __VUE_PROD_DEVTOOLS__: false,
-      __APP_INFO__: JSON.stringify(__APP_INFO__)
+      __APP_INFO__: JSON.stringify(__APP_INFO__),
     },
 
     plugins: createVitePlugin(viteEnv, isBuild),
@@ -64,17 +70,13 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: createPreprocessor()
-        }
-      }
+          additionalData: createPreprocessor(),
+        },
+      },
     },
 
     optimizeDeps: {
-      include: [
-        '@iconify/iconify',
-        'dayjs/locale/vi',
-        'dayjs/locale/en'
-      ]
-    }
-  }
+      include: ['@iconify/iconify', 'dayjs/locale/vi', 'dayjs/locale/en'],
+    },
+  };
 };

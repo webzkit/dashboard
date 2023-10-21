@@ -1,4 +1,3 @@
-import IconVue from "./src/Icon.vue";
+import IconVue from './src/Icon.vue';
 
-
-export default IconVue
+export default IconVue;

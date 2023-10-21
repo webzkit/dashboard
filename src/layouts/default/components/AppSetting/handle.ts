@@ -1,7 +1,6 @@
-import { SettingTaskEnum } from "./enum";
-import { useAppStore } from "/@/store/modules/app";
-import { ProjectConfig } from "/#/config";
-
+import { SettingTaskEnum } from './enum';
+import { useAppStore } from '/@/store/modules/app';
+import { ProjectConfig } from '/#/config';
 
 export function handleSetting(event: SettingTaskEnum, value: any) {
   const appStore = useAppStore();
@@ -10,8 +9,10 @@ export function handleSetting(event: SettingTaskEnum, value: any) {
   appStore.setProjectConfig(config);
 }
 
-
-const handle = function(event: SettingTaskEnum, value: any): DeepPartial<ProjectConfig> {
+const handle = function (
+  event: SettingTaskEnum,
+  value: any,
+): DeepPartial<ProjectConfig> {
   switch (event) {
     case SettingTaskEnum.APP_COLOR_SCHEMA:
       return { colorSchema: value };
@@ -20,8 +21,7 @@ const handle = function(event: SettingTaskEnum, value: any): DeepPartial<Project
       return { themeSize: value };
 
     case SettingTaskEnum.APP_THEME_COLOR:
-      return { themeColor: value }
-
+      return { themeColor: value };
 
     case SettingTaskEnum.HEADER_FIXED:
       return { headerSetting: { fixed: value } };
@@ -46,7 +46,6 @@ const handle = function(event: SettingTaskEnum, value: any): DeepPartial<Project
 
     case SettingTaskEnum.HEADER_ENABLE_CACHE_MULTI_TAB:
       return { headerSetting: { enableCacheMultiTab: value } };
-
 
     case SettingTaskEnum.MENU_MODE:
       return { menuSetting: { menuMode: value } };
@@ -81,5 +80,4 @@ const handle = function(event: SettingTaskEnum, value: any): DeepPartial<Project
     default:
       return {};
   }
-}
-
+};

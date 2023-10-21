@@ -1,7 +1,3 @@
-import fs from 'fs';
-import path from 'path';
-import dotenv from 'dotenv';
-
 export function isDevFn(mode: string): boolean {
   return mode === 'development';
 }
@@ -22,7 +18,8 @@ export function wrapperEnv(envConf: Recordable): ViteEnv {
 
   for (const envName of Object.keys(envConf)) {
     let realName = envConf[envName].replace(/\\n/g, '\n');
-    realName = realName === 'true' ? true : realName === 'false' ? false : realName;
+    realName =
+      realName === 'true' ? true : realName === 'false' ? false : realName;
 
     if (envName === 'VITE_PORT') {
       realName = Number(realName);

@@ -1,14 +1,14 @@
-import type { AppRouteRecordRaw, AppRouteModule } from "/@/router/types";
-import { DashboardRoute, RedirectRoute } from "/@/router/routes/basic";
-import { PageEnum } from "/@/enums/pageEnum";
-import { t } from "/@/hooks/web/useI18n";
-import { LOGIN_COMPONENT, LOGIN_NAME_ROUTE } from "../constant";
+import type { AppRouteRecordRaw, AppRouteModule } from '/@/router/types';
+import { DashboardRoute, RedirectRoute } from '/@/router/routes/basic';
+import { PageEnum } from '/@/enums/pageEnum';
+import { t } from '/@/hooks/web/useI18n';
+import { LOGIN_COMPONENT, LOGIN_NAME_ROUTE } from '../constant';
 
 // import.meta.globEager()
-const modules = import.meta.globEager("./modules/**/*.ts");
+const modules = import.meta.globEager('./modules/**/*.ts');
 const routeModuleList: AppRouteModule[] = [];
 
-Object.keys(modules).forEach((key) => {
+Object.keys(modules).forEach(key => {
   // @ts-ignore
   const mod = modules[key].default || {};
   const modList = Array.isArray(mod) ? [...mod] : [mod];
@@ -18,11 +18,11 @@ Object.keys(modules).forEach((key) => {
 export const asyncRoutes = [...routeModuleList];
 
 export const RootRoute: AppRouteRecordRaw = {
-  path: "/",
-  name: "Root",
+  path: '/',
+  name: 'Root',
   redirect: PageEnum.BASE_HOME,
   meta: {
-    title: t("routes.basic.root"),
+    title: t('routes.basic.root'),
   },
 };
 
@@ -31,7 +31,7 @@ export const LoginRoute: AppRouteRecordRaw = {
   name: LOGIN_NAME_ROUTE,
   component: LOGIN_COMPONENT,
   meta: {
-    title: t("routes.basic.login"),
+    title: t('routes.basic.login'),
   },
 };
 

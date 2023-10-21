@@ -1,15 +1,15 @@
-import type { RouteRecordRaw } from "vue-router";
-import type { App } from "vue";
+import type { RouteRecordRaw } from 'vue-router';
+import type { App } from 'vue';
 
-import { createRouter, createWebHashHistory } from "vue-router";
-import { basicRoutes, asyncRoutes } from "/@/router/routes";
-import { useAppSetting } from "../hooks/setting/useAppSetting";
-import { useRouteSetting } from "../hooks/setting/useRouteSetting";
-import { RouteBaseOnEnum } from "../enums/appEnum";
-import { get } from "lodash";
-import { useUserStore } from "../store/modules/user";
-import { LOGIN_NAME_ROUTE } from "./constant";
-import { useMenuStore } from "../store/modules/menu";
+import { createRouter, createWebHashHistory } from 'vue-router';
+import { basicRoutes, asyncRoutes } from '/@/router/routes';
+import { useAppSetting } from '../hooks/setting/useAppSetting';
+import { useRouteSetting } from '../hooks/setting/useRouteSetting';
+import { RouteBaseOnEnum } from '../enums/appEnum';
+import { get } from 'lodash';
+import { useUserStore } from '../store/modules/user';
+import { LOGIN_NAME_ROUTE } from './constant';
+import { useMenuStore } from '../store/modules/menu';
 
 export const router = createRouter({
   history: createWebHashHistory(import.meta.env.VITE_PUBLIC_PATH),
@@ -56,9 +56,9 @@ router.beforeEach(async (to, form, next) => {
       break;
   }
 
-  let removeRoutes: string[] = [];
-  routeSetting.routeStore.getFlatRoutes.forEach((route) => {
-    if (!/^(https?:|mailto:|tel:)/.test(get(route, "path", ""))) {
+  const removeRoutes: string[] = [];
+  routeSetting.routeStore.getFlatRoutes.forEach(route => {
+    if (!/^(https?:|mailto:|tel:)/.test(get(route, 'path', ''))) {
       // @ts-ignore
       removeRoutes.push(router.addRoute(route));
     }
