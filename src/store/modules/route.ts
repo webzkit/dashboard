@@ -105,13 +105,13 @@ export const useRouteStore = defineStore({
       return this.isGenerate;
     },
 
-    getRoutes(): string[] {
+    getRoutes(): any[] {
       return this.routes;
     },
 
     getFlatRoutes: state => {
       const appSetting = useAppSetting();
-      const routes = [];
+      const routes: any[] = [];
 
       if (state.routes) {
         if (appSetting.getRouteBaseOn.value === RouteBaseOnEnum.FILE_SYSTEM) {
@@ -119,12 +119,13 @@ export const useRouteStore = defineStore({
         }
 
         state.routes.map(item => {
-          // @ts-ignore
-          routes.push(...cloneDeep(item.children));
+          routes.push(...cloneDeep(get(item, 'children', {})));
 
           routes.map(item => flatAsyncRoutes(item));
         });
       }
+
+      console.log(routes);
 
       return routes;
     },
@@ -154,7 +155,6 @@ export const useRouteStore = defineStore({
           'meta.sort',
         );
 
-        // @ts-ignore
         resolved();
       });
     },
@@ -171,7 +171,6 @@ export const useRouteStore = defineStore({
       this.isGenerate = false;
       this.routes = [];
       this.currentRemoveRoutes.forEach(removeRoute => {
-        // @ts-ignore
         removeRoute();
       });
 

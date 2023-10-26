@@ -5,9 +5,10 @@ import { useAppSetting } from '/@/hooks/setting/useAppSetting';
 import { useMenuSetting } from '/@/hooks/setting/useMenuSetting';
 import { useRouteSetting } from '/@/hooks/setting/useRouteSetting';
 import { resolveRoutePath } from '/@/utils';
+import type { Menu } from '/#/global';
 
 interface MenuState {
-  menus: string[];
+  menus: Menu.recordMainRaw[];
   actived: number;
 }
 
@@ -41,7 +42,7 @@ export const useMenuStore = defineStore({
   id: 'app-menu',
 
   state: (): MenuState => ({
-    menus: [],
+    menus: [{ meta: {}, children: [] }],
     actived: 0,
   }),
 
@@ -59,8 +60,8 @@ export const useMenuStore = defineStore({
       if (menuSetting.getMenuMode.value === MenuModeEnum.SINGLE) {
         menus = [{ children: [] }];
         routeSetting.routeStore.getRoutes.map(item => {
-          // @ts-ignore
-          menus[0].children.push(...item.children);
+          menus[0].children?.push(...item.children);
+          console.log(item.children);
         });
 
         return menus;

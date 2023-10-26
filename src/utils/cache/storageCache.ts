@@ -11,7 +11,6 @@ export interface CreateStorageParams extends EncryptionParams {
   timeout?: Nullable<number>;
 }
 
-// @ts-ignore
 export const createStorage = ({
   prefixKey = '',
   storage = sessionStorage,
@@ -38,10 +37,6 @@ export const createStorage = ({
     private encryption: AesEncryption;
     private hasEncrypt: boolean;
 
-    /**
-     *
-     * @param {*} storage
-     */
     constructor() {
       this.storage = storage;
       this.prefixKey = prefixKey;

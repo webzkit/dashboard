@@ -24,7 +24,7 @@ dist-ssr
 *.sw?
 
 .eslintrc-auto-import.json
+.eslintcache
 components.d.ts
-
 
 .env

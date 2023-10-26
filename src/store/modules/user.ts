@@ -105,8 +105,6 @@ export const useUserStore = defineStore({
 
     async logout() {
       if (this.getAccessToken) {
-        console.log(this.getAccessToken);
-
         try {
           await logoutApi()
             .then(res => {

@@ -49,6 +49,30 @@ declare global {
   }
 }
 
+declare namespace Menu {
+  interface recordRaw {
+    path?: string;
+    meta?: {
+      title?: string;
+      icon?: string;
+      defaultOpened?: boolean;
+      auth?: string | string[];
+      sidebar?: boolean;
+      link?: string;
+    };
+    children?: recordRaw[];
+  }
+
+  interface recordMainRaw {
+    meta?: {
+      title?: string;
+      icon?: string;
+      auth?: string | string[];
+    };
+    children: recordRaw[];
+  }
+}
+
 declare module 'vue' {
   export type JSXComponent<Props = any> =
     | { new (): ComponentPublicInstance<Props> }
