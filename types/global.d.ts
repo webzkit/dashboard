@@ -49,6 +49,13 @@ declare global {
   }
 }
 
+declare module 'vue-router' {
+  interface RouteMeta {
+    sidebar?: boolean;
+    breadcrumbNeste?: any[];
+  }
+}
+
 declare namespace Menu {
   interface recordRaw {
     path?: string;

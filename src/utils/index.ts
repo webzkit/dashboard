@@ -1,7 +1,7 @@
 import { App, Plugin } from 'vue';
 import { isObject } from '/@/utils/is';
 import path from 'path-browserify';
-import { RouteLocationNormalized } from 'vue-router';
+import { RouteLocationNormalized, RouteRecordNormalized } from 'vue-router';
 
 export function isExternalLink(path: string) {
   return /^(https?:|mailto:|tel:)/.test(path);
@@ -39,14 +39,13 @@ export function getRawRoute(
 
   return {
     ...opt,
-
     matched: (matched
       ? matched.map(item => ({
           meta: item.meta,
           name: item.name,
           path: item.path,
         }))
-      : undefined) as RouteLocationNormalized[],
+      : undefined) as RouteRecordNormalized[],
   };
 }
 

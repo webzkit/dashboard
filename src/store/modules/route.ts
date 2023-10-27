@@ -7,7 +7,7 @@ import { resolveRoutePath } from '/@/utils';
 interface RouteState {
   isGenerate: boolean;
   routes: string[];
-  currentRemoveRoutes: string[];
+  currentRemoveRoutes: any[];
 }
 
 const flatAsyncRoutes = function (routes: any): any {
@@ -133,7 +133,7 @@ export const useRouteStore = defineStore({
 
   actions: {
     generateRouteAtFrontend(asyncRoutes: any) {
-      return new Promise(resolved => {
+      return new Promise<void>(resolved => {
         const accessedRoutes: any[] = [];
         this.isGenerate = true;
 
