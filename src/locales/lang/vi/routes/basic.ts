@@ -4,4 +4,3 @@ export default {
   dashboard: 'Bảng điều khiển',
   reload: 'Tải lại trang',
 };
-

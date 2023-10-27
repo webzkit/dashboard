@@ -1,12 +1,12 @@
 export default {
-  name: "Địa danh",
+  name: 'Địa danh',
   province: {
-    name: "Tỉnh & Thành Phố",
+    name: 'Tỉnh & Thành Phố',
   },
   district: {
-    name: "Quận Huyện",
+    name: 'Quận Huyện',
   },
   wards: {
-    name: "Phường Xã",
+    name: 'Phường Xã',
   },
 };

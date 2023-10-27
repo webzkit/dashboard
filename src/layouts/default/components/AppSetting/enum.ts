@@ -28,4 +28,3 @@ export enum SettingTaskEnum {
   FOOTER_COMPANY,
   FOOTER_WEBSITE,
 }
-

@@ -1,22 +1,20 @@
-import { defineStore } from "pinia";
-
+import { defineStore } from 'pinia';
 
 interface KeepAliveState {
-  nameComponents: string[]
+  nameComponents: string[];
 }
-
 
 export const useKeepAliveStore = defineStore({
   id: 'app-keep-alive',
 
   state: (): KeepAliveState => ({
-    nameComponents: []
+    nameComponents: [],
   }),
 
   getters: {
     getNameComponents(): string[] {
       return this.nameComponents;
-    }
+    },
   },
 
   actions: {
@@ -27,12 +25,11 @@ export const useKeepAliveStore = defineStore({
     remove(name: string) {
       this.nameComponents = this.nameComponents.filter(item => {
         return item !== name;
-      })
+      });
     },
 
     revoke() {
-      this.nameComponents = []
-    }
-  }
+      this.nameComponents = [];
+    },
+  },
 });
-

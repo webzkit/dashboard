@@ -1,6 +1,6 @@
-import { createLocalStorage, createSessionStorage } from "/@/utils/cache";
-import { Memory } from "/@/utils/cache/memory";
-import type { LockInfo, UserInfo } from "/#/store";
+import { createLocalStorage, createSessionStorage } from '/@/utils/cache';
+import { Memory } from '/@/utils/cache/memory';
+import type { LockInfo, UserInfo } from '/#/store';
 
 import {
   ACCESS_TOKEN_KEY,
@@ -9,13 +9,13 @@ import {
   PROJ_CFG_KEY,
   LOCK_INFO_KEY,
   APP_LOCAL_CACHE_KEY,
-  APP_SESSION_CACHE_KEY
-} from "/@/enums/cacheEnum";
+  APP_SESSION_CACHE_KEY,
+} from '/@/enums/cacheEnum';
 
-import { DEFAULT_CACHE_TIME } from "/@/settings/encryptionSetting";
-import { toRaw } from "vue";
-import { pick, omit } from "lodash-es";
-import { ProjectConfig } from "/#/config";
+import { DEFAULT_CACHE_TIME } from '/@/settings/encryptionSetting';
+import { toRaw } from 'vue';
+import { pick, omit } from 'lodash-es';
+import { ProjectConfig } from '/#/config';
 
 interface BasicStore {
   [ACCESS_TOKEN_KEY]: string | number | null | undefined;
@@ -38,7 +38,6 @@ const ss = createSessionStorage();
 const localMemory = new Memory(DEFAULT_CACHE_TIME);
 const sessionMemory = new Memory(DEFAULT_CACHE_TIME);
 
-
 function initPersistentMemory() {
   const localCache = ls.get(APP_LOCAL_CACHE_KEY);
   const sessionCache = ss.get(APP_SESSION_CACHE_KEY);
@@ -46,13 +45,16 @@ function initPersistentMemory() {
   sessionCache && sessionMemory.resetCache(sessionCache);
 }
 
-
 export class Persistent {
   static getLocal<T>(key: LocalKeys) {
     return localMemory.get(key)?.value as Nullable<T>;
   }
 
-  static setLocal(key: LocalKeys, value: LocalStore[LocalKeys], immediate = false): void {
+  static setLocal(
+    key: LocalKeys,
+    value: LocalStore[LocalKeys],
+    immediate = false,
+  ): void {
     localMemory.set(key, toRaw(value));
     immediate && ls.set(APP_LOCAL_CACHE_KEY, localMemory.getCache);
   }
@@ -71,7 +73,11 @@ export class Persistent {
     return sessionMemory.get(key)?.value as Nullable<T>;
   }
 
-  static setSession(key: SessionKeys, value: SessionStore[SessionKeys], immediate = false): void {
+  static setSession(
+    key: SessionKeys,
+    value: SessionStore[SessionKeys],
+    immediate = false,
+  ): void {
     sessionMemory.set(key, toRaw(value));
     immediate && ss.set(APP_SESSION_CACHE_KEY, sessionMemory.getCache);
   }
@@ -96,15 +102,24 @@ export class Persistent {
   }
 }
 
-window.addEventListener('beforeunload', function() {
-
+window.addEventListener('beforeunload', function () {
   ls.set(APP_LOCAL_CACHE_KEY, {
     ...omit(localMemory.getCache, LOCK_INFO_KEY),
-    ...pick(ls.get(APP_LOCAL_CACHE_KEY), [ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY, USER_INFO_KEY, LOCK_INFO_KEY]),
+    ...pick(ls.get(APP_LOCAL_CACHE_KEY), [
+      ACCESS_TOKEN_KEY,
+      REFRESH_TOKEN_KEY,
+      USER_INFO_KEY,
+      LOCK_INFO_KEY,
+    ]),
   });
   ss.set(APP_SESSION_CACHE_KEY, {
     ...omit(sessionMemory.getCache, LOCK_INFO_KEY),
-    ...pick(ss.get(APP_SESSION_CACHE_KEY), [ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY, USER_INFO_KEY, LOCK_INFO_KEY]),
+    ...pick(ss.get(APP_SESSION_CACHE_KEY), [
+      ACCESS_TOKEN_KEY,
+      REFRESH_TOKEN_KEY,
+      USER_INFO_KEY,
+      LOCK_INFO_KEY,
+    ]),
   });
 });
 

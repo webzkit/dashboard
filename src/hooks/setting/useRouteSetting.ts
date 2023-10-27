@@ -1,6 +1,5 @@
-import { computed } from "vue";
-import { useRouteStore } from "/@/store/modules/route";
-
+import { computed } from 'vue';
+import { useRouteStore } from '/@/store/modules/route';
 
 export function useRouteSetting() {
   const routeStore = useRouteStore();
@@ -12,7 +11,6 @@ export function useRouteSetting() {
     routeStore,
 
     getRoutes,
-    getIsGenerate
-  }
+    getIsGenerate,
+  };
 }
-

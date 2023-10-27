@@ -1,6 +1,6 @@
-import type { ProjectConfig } from "/#/config";
-import { computed } from "vue";
-import { useAppStore } from "/@/store/modules/app";
+import type { ProjectConfig } from '/#/config';
+import { computed } from 'vue';
+import { useAppStore } from '/@/store/modules/app';
 
 export function useAppSetting() {
   const appStore = useAppStore();
@@ -17,7 +17,7 @@ export function useAppSetting() {
   const getRouteBaseOn = computed(() => appStore.getProjectConfig.routeBaseOn);
   const getDisplayMode = computed(() => appStore.getProjectConfig.displayMode);
   const getEnableMobile = computed(
-    () => appStore.getProjectConfig.enableMobile
+    () => appStore.getProjectConfig.enableMobile,
   );
   const getThemeSize = computed(() => appStore.getProjectConfig.themeSize);
   const getThemeColor = computed(() => appStore.getProjectConfig.themeColor);

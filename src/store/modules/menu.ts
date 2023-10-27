@@ -1,17 +1,18 @@
-import { defineStore } from "pinia";
-import { unref } from "vue";
-import { MenuModeEnum, RouteBaseOnEnum } from "/@/enums/appEnum";
-import { useAppSetting } from "/@/hooks/setting/useAppSetting";
-import { useMenuSetting } from "/@/hooks/setting/useMenuSetting";
-import { useRouteSetting } from "/@/hooks/setting/useRouteSetting";
-import { resolveRoutePath } from "/@/utils";
+import { defineStore } from 'pinia';
+import { unref } from 'vue';
+import { MenuModeEnum, RouteBaseOnEnum } from '/@/enums/appEnum';
+import { useAppSetting } from '/@/hooks/setting/useAppSetting';
+import { useMenuSetting } from '/@/hooks/setting/useMenuSetting';
+import { useRouteSetting } from '/@/hooks/setting/useRouteSetting';
+import { resolveRoutePath } from '/@/utils';
+import type { Menu } from '/#/global';
 
 interface MenuState {
-  menus: string[];
+  menus: Menu.recordMainRaw[];
   actived: number;
 }
 
-const getDeepestPath = function (routes: any, rootPath: string = ""): string {
+const getDeepestPath = function (routes: any, rootPath: string = ''): string {
   if (!routes.children) {
     return resolveRoutePath(rootPath, routes.path);
   }
@@ -38,10 +39,10 @@ const getDeepestPath = function (routes: any, rootPath: string = ""): string {
 };
 
 export const useMenuStore = defineStore({
-  id: "app-menu",
+  id: 'app-menu',
 
   state: (): MenuState => ({
-    menus: [],
+    menus: [{ meta: {}, children: [] }],
     actived: 0,
   }),
 
@@ -58,9 +59,9 @@ export const useMenuStore = defineStore({
       const routeSetting = useRouteSetting();
       if (menuSetting.getMenuMode.value === MenuModeEnum.SINGLE) {
         menus = [{ children: [] }];
-        routeSetting.routeStore.getRoutes.map((item) => {
-          // @ts-ignore
-          menus[0].children.push(...item.children);
+        routeSetting.routeStore.getRoutes.map(item => {
+          menus[0].children?.push(...item.children);
+          console.log(item.children);
         });
 
         return menus;
@@ -80,12 +81,12 @@ export const useMenuStore = defineStore({
     sidebarMenuFirstDeepestPath() {
       return this.getMenus.length > 0
         ? getDeepestPath(this.getSidebarMenus[0])
-        : "/";
+        : '/';
     },
 
     defaultOpenedPaths() {
       const appSetting = useAppSetting();
-      let defaultOpenedpaths: string[] = [];
+      const defaultOpenedpaths: string[] = [];
 
       if (unref(appSetting.getRouteBaseOn) === RouteBaseOnEnum.FILE_SYSTEM) {
         return defaultOpenedpaths;
@@ -96,13 +97,11 @@ export const useMenuStore = defineStore({
         item.meta.defaultOpened && defaultOpenedpaths.push(item.path);
         item.children &&
           item.children.map((child: any) => {
-            //todo
-            /*
             child.meta.defaultOpened &&
-              defaultOpenedpaths.push(
-                pathBrowserify.resolve(item.path, child.path),
-              );
-            */
+              defaultOpenedpaths
+                .push
+                //pathBrowserify.resolve(item.path, child.path),
+                ();
           });
       });
 
@@ -112,13 +111,13 @@ export const useMenuStore = defineStore({
 
   actions: {
     setActived(data: any) {
-      if (typeof data === "number") {
+      if (typeof data === 'number') {
         this.actived = data;
       } else {
         this.getMenus.map((item, index) => {
           if (
             item.children.some((r: any) => {
-              return data.indexOf(r.path + "/") === 0 || data === r.path;
+              return data.indexOf(r.path + '/') === 0 || data === r.path;
             })
           ) {
             this.actived = index;

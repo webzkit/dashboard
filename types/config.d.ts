@@ -1,18 +1,18 @@
-import { CacheTypeEnum } from "/@/enums/cacheEnum";
+import { CacheTypeEnum } from '/@/enums/cacheEnum';
 
-export type LocaleType = "vi" | "en" | "ja" | "zh_CN";
+export type LocaleType = 'vi' | 'en' | 'ja' | 'zh_CN';
 
-export type designKeys = "name" | "value" | "color";
+export type designKeys = 'name' | 'value' | 'color';
 export type designType = {
   [key in designKeys]?: string;
 };
-export type themeSize = "large" | "default" | "small";
+export type themeSize = 'large' | 'default' | 'small';
 
 export type NotificationPosition =
-  | "top-right"
-  | "top-left"
-  | "bottom-right"
-  | "bottom-left";
+  | 'top-right'
+  | 'top-left'
+  | 'bottom-right'
+  | 'bottom-left';
 
 export interface LocaleSetting {
   showPicker: boolean;

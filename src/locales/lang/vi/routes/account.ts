@@ -3,4 +3,3 @@ export default {
   user: 'Người dùng',
   group: 'Nhóm người dùng',
 };
-

@@ -1,8 +1,13 @@
-import { CacheTypeEnum } from "../enums/cacheEnum";
-import { colorTheme } from "./designSetting";
-import { ProjectConfig } from "/#/config";
-import { DisplayModeEnum, MenuWidthEnum, RouteBaseOnEnum, ThemeEnum, ThemeSizeEnum } from "/@/enums/appEnum";
-
+import { CacheTypeEnum } from '../enums/cacheEnum';
+import { colorTheme } from './designSetting';
+import { ProjectConfig } from '/#/config';
+import {
+  DisplayModeEnum,
+  MenuWidthEnum,
+  RouteBaseOnEnum,
+  ThemeEnum,
+  ThemeSizeEnum,
+} from '/@/enums/appEnum';
 
 // Must need to clear the browser cache after the change
 const setting: ProjectConfig = {
@@ -45,15 +50,14 @@ const setting: ProjectConfig = {
     enableCopyright: true,
     company: 'Webzkit',
     date: '2022 - 2025',
-    website: 'https://webzkit.com'
+    website: 'https://webzkit.com',
   },
 
   // Element plus setting
   elePlusSetting: {
     duration: 3000,
     notificatonPosition: 'bottom-right',
-  }
-}
-
+  },
+};
 
 export default setting;

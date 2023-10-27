@@ -1,14 +1,13 @@
-import { unref } from "vue";
-import { Router, useRouter } from "vue-router";
-import { REDIRECT_NAME_ROUTE } from "/@/router/constant";
-
+import { unref } from 'vue';
+import { Router, useRouter } from 'vue-router';
+import { REDIRECT_NAME_ROUTE } from '/@/router/constant';
 
 export const useRedo = (router?: Router) => {
   const { replace, currentRoute } = router || useRouter();
   const { query, params = {}, name, fullPath } = unref(currentRoute.value);
 
   function redo(): Promise<boolean> {
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       if (name === REDIRECT_NAME_ROUTE) {
         resolve(false);
 
@@ -23,10 +22,11 @@ export const useRedo = (router?: Router) => {
         params['path'] = fullPath;
       }
 
-      replace({ name: REDIRECT_NAME_ROUTE, params, query }).then(() => resolve(true));
+      replace({ name: REDIRECT_NAME_ROUTE, params, query }).then(() =>
+        resolve(true),
+      );
     });
   }
 
   return redo;
 };
-

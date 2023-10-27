@@ -1,12 +1,12 @@
 export default {
-  name: "Location",
+  name: 'Location',
   province: {
-    name: "Province",
+    name: 'Province',
   },
   district: {
-    name: "District",
+    name: 'District',
   },
   ward: {
-    name: "Ward",
+    name: 'Ward',
   },
 };

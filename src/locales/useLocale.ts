@@ -1,19 +1,18 @@
 /**
  * Multi-languge related operations
  */
-import type { LocaleType } from "/#/config";
+import type { LocaleType } from '/#/config';
 import { i18n } from './setupI18n';
-import { useLocaleStoreWithOut } from "/@/store/modules/locale";
-import { unref, computed } from "vue";
-import { loadLocalePool, setHtmlPageLang } from "/@/locales/helper";
-import dayjs from "dayjs";
-import * as updateLocale from "dayjs/plugin/updateLocale";
-
+import { useLocaleStoreWithOut } from '/@/store/modules/locale';
+import { unref, computed } from 'vue';
+import { loadLocalePool, setHtmlPageLang } from '/@/locales/helper';
+import dayjs from 'dayjs';
+import * as updateLocale from 'dayjs/plugin/updateLocale';
 
 interface LangModule {
-  message: Recordable,
-  dateLocale: Recordable,
-  dateLocaleName: string
+  message: Recordable;
+  dateLocale: Recordable;
+  dateLocaleName: string;
 }
 
 function setI18nLanguage(locale: LocaleType) {
@@ -29,7 +28,6 @@ function setI18nLanguage(locale: LocaleType) {
   setHtmlPageLang(locale);
 }
 
-
 export function useLocale() {
   const localeStore = useLocaleStoreWithOut();
   const getLocale = computed(() => localeStore.getLocale);
@@ -39,7 +37,6 @@ export function useLocale() {
     // @ts-ignore
     return i18n.global.getLocaleMessage(unref(getLocale))?.elPlusLocale ?? {};
   });
-
 
   async function changeLocale(locale: LocaleType) {
     const globalI18n = i18n.global;
@@ -55,7 +52,8 @@ export function useLocale() {
       return locale;
     }
 
-    const langModule = ((await import(`./lang/${locale}.ts`)) as any).default as LangModule;
+    const langModule = ((await import(`./lang/${locale}.ts`)) as any)
+      .default as LangModule;
     if (!langModule) return;
 
     const { message, dateLocale, dateLocaleName } = langModule;
@@ -76,6 +74,5 @@ export function useLocale() {
     getElPlusLocale,
 
     changeLocale,
-  }
+  };
 }
-

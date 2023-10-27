@@ -4,21 +4,20 @@ import vueJsx from '@vitejs/plugin-vue-jsx';
 import legacy from '@vitejs/plugin-legacy';
 import vueSetupExtend from 'vite-plugin-vue-setup-extend';
 import { configHtmlPlugin } from './html';
-import { configPwaPlugin } from "./pwa";
-import { configImageminPlugin } from "./imagemin";
+import { configPwaPlugin } from './pwa';
+import { configImageminPlugin } from './imagemin';
 import { configCompressPlugin } from './compress';
-import { configAutoImport } from "./auto-import";
-import { configAutoImportComponents } from "./components";
-import { configIconPlugin } from "./icon";
-
+import { configAutoImport } from './auto-import';
+import { configAutoImportComponents } from './components';
+import { configIconPlugin } from './icon';
 
 export function createVitePlugin(viteEnv: ViteEnv, isBuild: boolean) {
   const {
     VITE_USE_IMAGEMIN,
     VITE_LEGACY,
     VITE_BUILD_COMPRESS,
-    VITE_BUILD_COMPRESS_DELETE_ORIGIN_FILE
-  } = viteEnv
+    VITE_BUILD_COMPRESS_DELETE_ORIGIN_FILE,
+  } = viteEnv;
 
   const vitePlugins: (PluginOption | PluginOption[])[] = [
     // Must have
@@ -28,7 +27,7 @@ export function createVitePlugin(viteEnv: ViteEnv, isBuild: boolean) {
     vueJsx(),
 
     // Support name
-    vueSetupExtend()
+    vueSetupExtend(),
   ];
 
   // @vitejs/plugin-legacy
@@ -42,7 +41,6 @@ export function createVitePlugin(viteEnv: ViteEnv, isBuild: boolean) {
   vitePlugins.push(configAutoImportComponents());
   vitePlugins.push(configIconPlugin());
 
-
   // The following plugins only work in the production environment
   if (isBuild) {
     // Vite-plugin-imagemin
@@ -50,7 +48,10 @@ export function createVitePlugin(viteEnv: ViteEnv, isBuild: boolean) {
 
     // Rollup-plugin-gzip
     vitePlugins.push(
-      configCompressPlugin(VITE_BUILD_COMPRESS, VITE_BUILD_COMPRESS_DELETE_ORIGIN_FILE)
+      configCompressPlugin(
+        VITE_BUILD_COMPRESS,
+        VITE_BUILD_COMPRESS_DELETE_ORIGIN_FILE,
+      ),
     );
 
     vitePlugins.push(configPwaPlugin(viteEnv));

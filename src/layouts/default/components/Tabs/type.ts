@@ -5,5 +5,4 @@ export type tabsType = {
   disabled: boolean;
   show: boolean;
   event?: number;
-}
-
+};

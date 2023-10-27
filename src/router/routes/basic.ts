@@ -7,14 +7,14 @@ import {
   LAYOUT,
   REDIRECT_COMPONENT,
   REDIRECT_NAME_ROUTE,
-} from "/@/router/constant";
+} from '/@/router/constant';
 
 export const DashboardRoute = {
   path: PageEnum.BASE_HOME,
   component: LAYOUT,
   meta: {
     title: t('routes.basic.dashboard'),
-    breadcrumb: false
+    breadcrumb: false,
   },
   children: [
     {
@@ -24,12 +24,11 @@ export const DashboardRoute = {
       meta: {
         title: t('routes.basic.dashboard'),
         breadcrumb: false,
-        hideClose: true
-      }
-    }
-  ]
-}
-
+        hideClose: true,
+      },
+    },
+  ],
+};
 
 export const RedirectRoute: AppRouteRecordRaw = {
   path: PageEnum.BASE_REDIRECT,
@@ -46,9 +45,8 @@ export const RedirectRoute: AppRouteRecordRaw = {
       component: REDIRECT_COMPONENT,
       meta: {
         title: REDIRECT_NAME_ROUTE,
-        breadcrumb: false
-      }
-    }
-  ]
-}
-
+        breadcrumb: false,
+      },
+    },
+  ],
+};

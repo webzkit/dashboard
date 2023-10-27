@@ -16,7 +16,7 @@ export class AesEncryption {
   private iv;
 
   constructor(opt: Partial<EncryptionParams> = {}) {
-    const {key, iv} = opt;
+    const { key, iv } = opt;
     if (key) {
       this.key = parse(key);
     }

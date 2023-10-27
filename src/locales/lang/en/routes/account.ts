@@ -3,4 +3,3 @@ export default {
   user: 'User',
   group: 'Group user',
 };
-

@@ -7,14 +7,12 @@ export interface LoginParams {
   remember?: boolean;
 }
 
-
 /**
  * Login interface return value
  */
 export interface LoginResult {
-  status: boolean,
-  messgae: string
+  status: boolean;
+  messgae: string;
   access_token: string;
   refresh_token: string;
 }
-

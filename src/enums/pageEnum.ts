@@ -10,4 +10,3 @@ export enum PageEnum {
 
   BASE_REDIRECT = '/redirect',
 }
-

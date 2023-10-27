@@ -4,4 +4,3 @@ export default {
   dashboard: 'Dashboard',
   reload: 'Reload',
 };
-

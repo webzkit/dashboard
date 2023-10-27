@@ -1,8 +1,8 @@
-import { cacheCipher } from "/@/settings/encryptionSetting";
+import { cacheCipher } from '/@/settings/encryptionSetting';
 
-import type { EncryptionParams } from "/@/utils/cipher";
-import { AesEncryption } from "/@/utils/cipher";
-import { isNullOrUnDef } from "/@/utils/is";
+import type { EncryptionParams } from '/@/utils/cipher';
+import { AesEncryption } from '/@/utils/cipher';
+import { isNullOrUnDef } from '/@/utils/is';
 
 export interface CreateStorageParams extends EncryptionParams {
   prefixKey: string;
@@ -11,20 +11,19 @@ export interface CreateStorageParams extends EncryptionParams {
   timeout?: Nullable<number>;
 }
 
-// @ts-ignore
 export const createStorage = ({
-                                prefixKey = '',
-                                storage = sessionStorage,
-                                key = cacheCipher.key,
-                                iv = cacheCipher.iv,
-                                timeout = null,
-                                hasEncrypt = true,
-                              }: Partial<CreateStorageParams> = {}) => {
-  if (hasEncrypt && [key.length, iv.length].some((item) => item !== 16)) {
+  prefixKey = '',
+  storage = sessionStorage,
+  key = cacheCipher.key,
+  iv = cacheCipher.iv,
+  timeout = null,
+  hasEncrypt = true,
+}: Partial<CreateStorageParams> = {}) => {
+  if (hasEncrypt && [key.length, iv.length].some(item => item !== 16)) {
     throw new Error('When hasEncrypt is true, the key or iv must be 16 bits!');
   }
 
-  const encryption = new AesEncryption({key, iv});
+  const encryption = new AesEncryption({ key, iv });
 
   /**
    * Cache class
@@ -38,10 +37,6 @@ export const createStorage = ({
     private encryption: AesEncryption;
     private hasEncrypt: boolean;
 
-    /**
-     *
-     * @param {*} storage
-     */
     constructor() {
       this.storage = storage;
       this.prefixKey = prefixKey;
@@ -65,7 +60,9 @@ export const createStorage = ({
       const stringData = JSON.stringify({
         value,
         time: Date.now(),
-        expire: !isNullOrUnDef(expire) ? new Date().getTime() + expire * 1000 : null,
+        expire: !isNullOrUnDef(expire)
+          ? new Date().getTime() + expire * 1000
+          : null,
       });
 
       const stringifyValue = this.hasEncrypt
@@ -85,9 +82,11 @@ export const createStorage = ({
       if (!val) return def;
 
       try {
-        const decVal = this.hasEncrypt ? this.encryption.decryptByAES(val) : val;
+        const decVal = this.hasEncrypt
+          ? this.encryption.decryptByAES(val)
+          : val;
         const data = JSON.parse(decVal);
-        const {value, expire} = data;
+        const { value, expire } = data;
 
         if (isNullOrUnDef(expire) || expire >= new Date().getTime()) {
           return value;

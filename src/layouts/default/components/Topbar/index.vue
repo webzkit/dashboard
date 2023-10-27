@@ -32,16 +32,16 @@
 </template>
 
 <script lang="ts" setup>
-import { get } from "lodash";
-import { computed, onMounted, onUnmounted, ref, unref } from "vue";
-import { useRoute } from "vue-router";
-import { compile } from "path-to-regexp";
-import Tools from "../Tools/index.vue";
-import { DisplayModeEnum, RouteBaseOnEnum } from "/@/enums/appEnum";
-import { useAppSetting } from "/@/hooks/setting/useAppSetting";
-import { useHeaderSetting } from "/@/hooks/setting/useHeaderSetting";
-import { useMenuSetting } from "/@/hooks/setting/useMenuSetting";
-import { useI18n } from "/@/hooks/web/useI18n";
+import { get } from 'lodash';
+import { computed, onMounted, onUnmounted, ref, unref } from 'vue';
+import { useRoute } from 'vue-router';
+import { compile } from 'path-to-regexp';
+import Tools from '../Tools/index.vue';
+import { DisplayModeEnum, RouteBaseOnEnum } from '/@/enums/appEnum';
+import { useAppSetting } from '/@/hooks/setting/useAppSetting';
+import { useHeaderSetting } from '/@/hooks/setting/useHeaderSetting';
+import { useMenuSetting } from '/@/hooks/setting/useMenuSetting';
+import { useI18n } from '/@/hooks/web/useI18n';
 
 const route = useRoute();
 const { t } = useI18n();
@@ -57,11 +57,11 @@ const onScroll = function () {
 };
 
 onMounted(() => {
-  window.addEventListener("scroll", onScroll);
+  window.addEventListener('scroll', onScroll);
 });
 
 onUnmounted(() => {
-  window.removeEventListener("scroll", onScroll);
+  window.removeEventListener('scroll', onScroll);
 });
 
 const toogleSidebarCollapse = function () {
@@ -80,16 +80,15 @@ const breadcrumbes = computed(() => {
   let results: any[] = [];
   if (unref(getEnableMobile)) {
     results.push({
-      path: "/dashboard",
-      title: "Home",
+      path: '/dashboard',
+      title: 'Home',
     });
   }
 
   if (route.meta.breadcrumbNeste) {
-    // @ts-ignore
     results.push(
       ...route.meta.breadcrumbNeste.filter(
-        (item: any) => get(item, "hide", false) === false,
+        (item: any) => get(item, 'hide', false) === false,
       ),
     );
   }

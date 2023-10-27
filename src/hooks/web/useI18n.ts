@@ -1,4 +1,4 @@
-import { i18n } from "/@/locales/setupI18n";
+import { i18n } from '/@/locales/setupI18n';
 
 type I18nGlobalTranslation = {
   (key: string): string;
@@ -52,4 +52,3 @@ export function useI18n(namespace?: string): {
 // Why write this function？
 // Mainly to configure the vscode i18nn ally plugin. This function is only used for routing and menus. Please use useI18n for other places
 export const t = (key: string) => key;
-

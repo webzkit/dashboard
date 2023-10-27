@@ -26,15 +26,15 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject, unref } from "vue";
-import Logo from "../Logo/index.vue";
-import { DisplayModeEnum, MenuModeEnum } from "/@/enums/appEnum";
-import { useAppSetting } from "/@/hooks/setting/useAppSetting";
-import { useMenuSetting } from "/@/hooks/setting/useMenuSetting";
-import Icon from "/@/components/Icon";
-import { map, get } from "lodash";
-import { useI18n } from "/@/hooks/web/useI18n";
-import Tools from "../Tools/index.vue";
+import { computed, inject, unref } from 'vue';
+import Logo from '../Logo/index.vue';
+import { DisplayModeEnum, MenuModeEnum } from '/@/enums/appEnum';
+import { useAppSetting } from '/@/hooks/setting/useAppSetting';
+import { useMenuSetting } from '/@/hooks/setting/useMenuSetting';
+import Icon from '/@/components/Icon';
+import { map, get } from 'lodash';
+import { useI18n } from '/@/hooks/web/useI18n';
+import Tools from '../Tools/index.vue';
 
 const { t } = useI18n();
 const { getDisplayMode } = useAppSetting();
@@ -47,11 +47,11 @@ const isShow = computed(() => {
   );
 });
 
-const items = map(unref(getMenus), (item) => {
+const items = map(unref(getMenus), item => {
   return {
-    title: t(get(item, "meta.title", "")),
-    icon: get(item, "meta.icon", "ep:home-filled"),
-    children: get(item, "children", []),
+    title: t(get(item, 'meta.title', '')),
+    icon: get(item, 'meta.icon', 'ep:home-filled'),
+    children: get(item, 'children', []),
   };
 });
 
@@ -59,7 +59,7 @@ const isActive = function (index: number): boolean {
   return index === unref(getActiveMenu);
 };
 
-const switchMenu = inject("switchMenu");
+const switchMenu = inject('switchMenu') as any;
 </script>
 
 <style lang="scss" scoped>
@@ -142,7 +142,7 @@ header {
       position: relative;
 
       &:before {
-        content: "";
+        content: '';
         opacity: 0;
         left: 0;
         width: 12px;

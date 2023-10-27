@@ -1,11 +1,8 @@
-import Pages from "vite-plugin-pages"
-
+import Pages from 'vite-plugin-pages';
 
 export function createPages() {
   return Pages({
     dirs: 'src/views',
-    exclude: [
-      '**/components/**/*.vue'
-    ]
+    exclude: ['**/components/**/*.vue'],
   });
 }

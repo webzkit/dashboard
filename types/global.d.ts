@@ -1,5 +1,5 @@
 import type {
-  ComponentRenderProxy,
+  //ComponentRenderProxy,
   ComponentPublicInstance,
   FunctionalComponent,
 } from 'vue';
@@ -13,7 +13,7 @@ declare global {
       devDependencies: Recordable<string>;
     };
     lastBuildTime: string;
-  }
+  };
 
   // vue
   declare type PropType<T> = VuePropType<T>;
@@ -49,8 +49,39 @@ declare global {
   }
 }
 
+declare module 'vue-router' {
+  interface RouteMeta {
+    sidebar?: boolean;
+    breadcrumbNeste?: any[];
+  }
+}
+
+declare namespace Menu {
+  interface recordRaw {
+    path?: string;
+    meta?: {
+      title?: string;
+      icon?: string;
+      defaultOpened?: boolean;
+      auth?: string | string[];
+      sidebar?: boolean;
+      link?: string;
+    };
+    children?: recordRaw[];
+  }
+
+  interface recordMainRaw {
+    meta?: {
+      title?: string;
+      icon?: string;
+      auth?: string | string[];
+    };
+    children: recordRaw[];
+  }
+}
+
 declare module 'vue' {
   export type JSXComponent<Props = any> =
-    | { new(): ComponentPublicInstance<Props> }
+    | { new (): ComponentPublicInstance<Props> }
     | FunctionalComponent<Props>;
 }
